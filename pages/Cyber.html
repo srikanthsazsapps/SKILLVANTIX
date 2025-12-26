@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Security Course | SKILL VANTIX</title>
+    
+    <meta name="description" content="Become a Cyber Security Professional. Master network security, ethical hacking, penetration testing, and security operations in our comprehensive course.">
+    <meta name="keywords" content="cyber security, ethical hacking, penetration testing, network security, security operations, cryptography">
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="Cyber.css">
+</head>
+<body>
+    <!-- Inline JavaScript for Animations -->
+    <script>
+        /* ========================================
+   CYBER SECURITY PAGE - JAVASCRIPT
+   Interactive Features & Animations
+======================================== */
+
+(function() {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // ========================================
+        // Navigation Toggle
+        // ========================================
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        }
+
+        // ========================================
+        // Navbar Scroll Effect
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========================================
+        // Smooth Scrolling
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // Accordion Functionality
+        // ========================================
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const accordionItem = header.parentElement;
+                const isActive = accordionItem.classList.contains('active');
+
+                // Close all accordion items
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    accordionItem.classList.add('active');
+                }
+            });
+        });
+
+        // Open first accordion item by default
+        if (accordionHeaders.length > 0) {
+            accordionHeaders[0].parentElement.classList.add('active');
+        }
+
+        // ========================================
+        // Scroll Animations (Intersection Observer)
+        // ========================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // Trigger child animations
+                    const children = entry.target.querySelectorAll('.mastery-card, .tech-item, .project-card, .accordion-item, .career-badge');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'none';
+                        }, index * 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        const sectionsToObserve = document.querySelectorAll('.section');
+        sectionsToObserve.forEach(section => {
+            observer.observe(section);
+        });
+
+        // ========================================
+        // Newsletter Form
+        // ========================================
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for subscribing! We\'ll keep you updated.');
+                newsletterForm.reset();
+            });
+        }
+
+        // ========================================
+        // Parallax Effect for Hero Background
+        // ========================================
+        const heroBackground = document.querySelector('.hero-background');
+        if (heroBackground) {
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.pageYOffset;
+                heroBackground.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+            });
+        }
+
+        // ========================================
+        // Button Ripple Effect
+        // ========================================
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // ========================================
+        // Card Tilt Effect (Desktop Only)
+        // ========================================
+        if (window.innerWidth > 768) {
+            const cards = document.querySelectorAll('.mastery-card, .project-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            });
+        }
+
+        // ========================================
+        // Keyboard Accessibility for Accordion
+        // ========================================
+        accordionHeaders.forEach((header, index) => {
+            header.setAttribute('tabindex', '0');
+            header.setAttribute('role', 'button');
+            header.setAttribute('aria-expanded', 'false');
+            
+            header.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    header.click();
+                }
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const nextHeader = accordionHeaders[index + 1];
+                    if (nextHeader) nextHeader.focus();
+                }
+                
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prevHeader = accordionHeaders[index - 1];
+                    if (prevHeader) prevHeader.focus();
+                }
+            });
+            
+            header.addEventListener('click', () => {
+                const isExpanded = header.parentElement.classList.contains('active');
+                header.setAttribute('aria-expanded', isExpanded);
+            });
+        });
+
+        // ========================================
+        // Console Message
+        // ========================================
+        console.log('%c🔒 SKILL VANTIX - Cyber Security Course ', 'background: #0A2540; color: #00D4FF; font-size: 16px; padding: 10px;');
+        console.log('%cSecure the digital world, one vulnerability at a time!', 'color: #0A2540; font-size: 14px;');
+
+    });
+
+})();
+    </script>
+
+    <!-- Navigation -->
+ <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
+                <!-- <span>SKILL VANTIX</span> -->
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link active" href="../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/About.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="hero-background"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-subtitle">Cyber Security Professional Program</p>
+                    <h1 class="hero-title">Protect Digital Assets & Combat Cyber Threats</h1>
+                    <p class="hero-description">Master security principles, ethical hacking, and industry-standard protection tools. Become the guardian of the digital realm and defend against evolving cyber threats.</p>
+                    <div class="hero-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="fact-text">
+                                <strong>Duration</strong>
+                                <span>6 Months</span>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-signal"></i>
+                            <div class="fact-text">
+                                <strong>Skill Level</strong>
+                                <span>Beginner</span>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div class="fact-text">
+                                <strong>Career Track</strong>
+                                <span>Hot Career</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- What You Will Master Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Core Competencies</p>
+                    <h2 class="section-title">What You Will Master</h2>
+                </div>
+                <div class="mastery-grid">
+                    <div class="mastery-card">
+                        <div class="mastery-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h4>Network Security & Protocols</h4>
+                        <p>Master network architecture, firewalls, VPNs, and secure network protocols to protect organizational infrastructure.</p>
+                    </div>
+                    <div class="mastery-card">
+                        <div class="mastery-icon">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <h4>Ethical Hacking & Penetration Testing</h4>
+                        <p>Learn offensive security techniques, vulnerability assessment, and penetration testing methodologies used by professionals.</p>
+                    </div>
+                    <div class="mastery-card">
+                        <div class="mastery-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h4>Security Operations & Incident Response</h4>
+                        <p>Develop skills in security monitoring, threat detection, incident handling, and rapid response to security breaches.</p>
+                    </div>
+                    <div class="mastery-card">
+                        <div class="mastery-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h4>Cryptography & Data Protection</h4>
+                        <p>Understand encryption algorithms, cryptographic protocols, and data protection strategies to secure sensitive information.</p>
+                    </div>
+                    <div class="mastery-card">
+                        <div class="mastery-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h4>Security Compliance & Risk Management</h4>
+                        <p>Learn security frameworks, compliance standards (ISO, NIST), and risk assessment methodologies for enterprise security.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Tools of the Trade</p>
+                    <h2 class="section-title">Industry-Standard Security Tools</h2>
+                </div>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <img src="https://www.kali.org/images/kali-logo.svg" alt="Kali Linux">
+                        <p>Kali Linux</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/wireshark/wireshark-icon.svg" alt="Wireshark">
+                        <p>Wireshark</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://nmap.org/images/nmap-logo-256x256.png" alt="Nmap">
+                        <p>Nmap</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.metasploit.com/assets/metasploit-r7-logo.svg" alt="Metasploit">
+                        <p>Metasploit</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="Bash">
+                        <p>Bash</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/python/python-icon.svg" alt="Python">
+                        <p>Python</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Course Structure</p>
+                    <h2 class="section-title">Comprehensive Security Training Path</h2>
+                </div>
+                <div class="curriculum-wrapper">
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">01</span>
+                                <span class="accordion-title">Security Fundamentals & Network Basics</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Build a strong foundation in information security principles, CIA triad, network protocols, and basic security concepts essential for advanced learning.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">02</span>
+                                <span class="accordion-title">Network Security & Infrastructure Protection</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Master firewalls, IDS/IPS systems, VPNs, network segmentation, and secure network architecture design to protect organizational infrastructure.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">03</span>
+                                <span class="accordion-title">Ethical Hacking & Penetration Testing</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Learn reconnaissance, scanning, enumeration, exploitation, and post-exploitation techniques. Conduct full penetration tests using industry-standard methodologies.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">04</span>
+                                <span class="accordion-title">Web Application & System Security</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Master OWASP Top 10 vulnerabilities, web application security testing, system hardening, and secure coding practices to protect applications and systems.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">05</span>
+                                <span class="accordion-title">Security Operations & Incident Response</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Develop skills in SIEM tools, log analysis, threat hunting, incident response procedures, and security operations center (SOC) operations.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">06</span>
+                                <span class="accordion-title">Cryptography, Compliance & Career Prep</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Master encryption techniques, security frameworks (ISO 27001, NIST), compliance requirements, and prepare for industry certifications like CEH and Security+.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Projects Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Build Your Portfolio</p>
+                    <h2 class="section-title">Hands-On Security Projects</h2>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop" alt="Penetration Testing Lab">
+                        </div>
+                        <div class="project-content">
+                            <h5>Full Penetration Test Report</h5>
+                            <p>Conduct a comprehensive penetration test on a simulated corporate network, identify vulnerabilities, and deliver a professional security assessment report.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Security Operations Center">
+                        </div>
+                        <div class="project-content">
+                            <h5>Incident Response Simulation</h5>
+                            <p>Build a SOC environment, detect a simulated security breach, conduct forensic analysis, and execute a complete incident response playbook.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2070&auto=format&fit=crop" alt="Secure Infrastructure">
+                        </div>
+                        <div class="project-content">
+                            <h5>Secure Network Architecture</h5>
+                            <p>Design and implement a secure enterprise network with proper segmentation, firewall rules, VPN configuration, and comprehensive security policies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Career Outcomes -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Your Future Career</p>
+                    <h2 class="section-title">High-Demand Career Opportunities</h2>
+                </div>
+                <div class="careers-container">
+                    <span class="career-badge">Security Analyst</span>
+                    <span class="career-badge">Penetration Tester</span>
+                    <span class="career-badge">Security Engineer</span>
+                    <span class="career-badge">SOC Analyst</span>
+                    <span class="career-badge">Incident Responder</span>
+                    <span class="career-badge">Security Consultant</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-content">
+                        <h2>Become a Cyber Security Guardian</h2>
+                        <p>Join the frontline of digital defense. Enroll now and start your journey to becoming a certified cyber security professional.</p>
+                    </div>
+                    <div class="cta-button">
+                        <a href="Enroll/index.html" class="btn btn-light btn-lg">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>SKILL VANTIX</h5>
+                    <p>Empowering professionals with cutting-edge training and comprehensive career support to succeed in the technology industry.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html#programs">Programs</a></li>
+                        <li><a href="index.html#courses">Courses</a></li>
+                        <li><a href="pages/About.html">About Us</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="Career/index.html">Career Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Namakkal, Tamil Nadu</p>
+                    <p><i class="fas fa-phone"></i> +91 93609 94617</p>
+                    <p><i class="fas fa-envelope"></i> info@skillvantix.com</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to receive updates on new courses and career opportunities.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SKILL VANTIX. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

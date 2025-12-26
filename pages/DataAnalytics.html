@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analytics Course | SKILL VANTIX</title>
+    
+    <meta name="description" content="Become a job-ready Data Analyst. Master Python, SQL, Tableau, and Machine Learning with our hands-on, project-based Data Analytics course.">
+    <meta name="keywords" content="data analytics, python, sql, tableau, machine learning, data science course">
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="DataAnalytics.css">
+</head>
+<body>
+    <!-- Inline JavaScript for Animations -->
+    <script>
+        /* ========================================
+   DATA ANALYTICS COURSE PAGE - JAVASCRIPT
+   Interactive Features & Animations
+======================================== */
+
+(function() {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // ========================================
+        // Navigation Toggle
+        // ========================================
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        }
+
+        // ========================================
+        // Navbar Scroll Effect
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========================================
+        // Smooth Scrolling
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // Accordion Functionality
+        // ========================================
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const accordionItem = header.parentElement;
+                const isActive = accordionItem.classList.contains('active');
+
+                // Close all accordion items
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    accordionItem.classList.add('active');
+                }
+            });
+        });
+
+        // Open first accordion item by default
+        if (accordionHeaders.length > 0) {
+            accordionHeaders[0].parentElement.classList.add('active');
+        }
+
+        // ========================================
+        // Scroll Animations (Intersection Observer)
+        // ========================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // Trigger child animations
+                    const children = entry.target.querySelectorAll('.mastery-card, .tech-item, .project-card, .accordion-item, .career-badge');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'none';
+                        }, index * 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        const sectionsToObserve = document.querySelectorAll('.section');
+        sectionsToObserve.forEach(section => {
+            observer.observe(section);
+        });
+
+        // ========================================
+        // Newsletter Form
+        // ========================================
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = newsletterForm.querySelector('input[type="email"]').value;
+                
+                alert('Thank you for subscribing! We\'ll keep you updated.');
+                newsletterForm.reset();
+            });
+        }
+
+        // ========================================
+        // Parallax Effect for Hero Background
+        // ========================================
+        const heroBackground = document.querySelector('.hero-background');
+        if (heroBackground) {
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.pageYOffset;
+                heroBackground.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+            });
+        }
+
+        // ========================================
+        // Button Ripple Effect
+        // ========================================
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // ========================================
+        // Card Tilt Effect (Desktop Only)
+        // ========================================
+        if (window.innerWidth > 768) {
+            const cards = document.querySelectorAll('.mastery-card, .project-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            });
+        }
+
+        // ========================================
+        // Accessibility: Keyboard Navigation for Accordion
+        // ========================================
+        accordionHeaders.forEach((header, index) => {
+            header.setAttribute('tabindex', '0');
+            header.setAttribute('role', 'button');
+            header.setAttribute('aria-expanded', 'false');
+            
+            header.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    header.click();
+                }
+                
+                // Arrow key navigation
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const nextHeader = accordionHeaders[index + 1];
+                    if (nextHeader) nextHeader.focus();
+                }
+                
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prevHeader = accordionHeaders[index - 1];
+                    if (prevHeader) prevHeader.focus();
+                }
+            });
+            
+            // Update aria-expanded on click
+            header.addEventListener('click', () => {
+                const isExpanded = header.parentElement.classList.contains('active');
+                header.setAttribute('aria-expanded', isExpanded);
+            });
+        });
+
+        // ========================================
+        // Console Message
+        // ========================================
+        console.log('%c🎓 SKILL VANTIX - Data Analytics Course ', 'background: #0A2540; color: #00D4FF; font-size: 16px; padding: 10px;');
+        console.log('%cWelcome to the future of data education!', 'color: #0A2540; font-size: 14px;');
+
+    });
+
+})();
+    </script>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
+                <!-- <span>SKILL VANTIX</span> -->
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link" href="../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="hero-background"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-subtitle">Data Analytics Professional Program</p>
+                    <h1 class="hero-title">Transform Data Overload into Actionable Insight</h1>
+                    <p class="hero-description">Master Python, SQL, and Tableau to analyze complex data, build predictive models, and drive business growth. Become the data expert companies are searching for.</p>
+                    <div class="hero-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="fact-text">
+                                <strong>Duration</strong>
+                                <span>6 Months</span>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-signal"></i>
+                            <div class="fact-text">
+                                <strong>Skill Level</strong>
+                                <span>Beginner</span>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <div class="fact-text">
+                                <strong>Format</strong>
+                                <span>Online, Live</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- What You Will Master Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Core Competencies</p>
+                    <h2 class="section-title">What You Will Master</h2>
+                </div>
+                <div class="mastery-grid">
+                    <div class="mastery-card">
+                        <div class="mastery-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>Master Data Wrangling</h4>
+                        <p>Use Python and SQL to clean, transform, and query complex datasets with confidence.</p>
+                    </div>
+                    <div class="mastery-card">
+                        <div class="mastery-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h4>Tell Compelling Stories</h4>
+                        <p>Create stunning, interactive dashboards in Tableau and Power BI to present insights effectively.</p>
+                    </div>
+                    <div class="mastery-card">
+                        <div class="mastery-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h4>Uncover Hidden Patterns</h4>
+                        <p>Apply statistical analysis and hypothesis testing to validate findings and inform strategy.</p>
+                    </div>
+                    <div class="mastery-card">
+                        <div class="mastery-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>Predict the Future</h4>
+                        <p>Build and evaluate machine learning models for classification and regression tasks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Tools of the Trade</p>
+                    <h2 class="section-title">Technology You'll Use</h2>
+                </div>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/python/python-icon.svg" alt="Python">
+                        <p>Python</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg" alt="SQL">
+                        <p>SQL</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau">
+                        <p>Tableau</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg" alt="Power BI">
+                        <p>Power BI</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/scikit-learn/scikit-learn-icon.svg" alt="Scikit-learn">
+                        <p>Scikit-learn</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Pandas_mark.svg" alt="Pandas">
+                        <p>Pandas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Course Structure</p>
+                    <h2 class="section-title">Week-by-Week Curriculum</h2>
+                </div>
+                <div class="curriculum-wrapper">
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">01</span>
+                                <span class="accordion-title">Data Analytics Foundations & Excel</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Master advanced Excel functions, pivot tables, and statistical concepts that form the bedrock of data analysis.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">02</span>
+                                <span class="accordion-title">SQL for Data Extraction</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Learn to write complex SQL queries to extract, join, and aggregate data from relational databases like a pro.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">03</span>
+                                <span class="accordion-title">Python for Data Manipulation</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Dive into Python with Pandas and NumPy to perform powerful data cleaning, manipulation, and exploratory data analysis (EDA).</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">04</span>
+                                <span class="accordion-title">Data Visualization with Tableau & Power BI</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Build interactive and insightful dashboards that effectively communicate your findings to any audience.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">05</span>
+                                <span class="accordion-title">Introduction to Machine Learning</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Understand the fundamentals of machine learning and build predictive models for classification and regression using Scikit-learn.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">06</span>
+                                <span class="accordion-title">Capstone Project & Career Prep</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Apply all your skills to a real-world, end-to-end data analytics project, and prepare for interviews with resume workshops and mock sessions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Projects Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Build Your Portfolio</p>
+                    <h2 class="section-title">Hands-On Portfolio Projects</h2>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop" alt="E-commerce Sales Dashboard">
+                        </div>
+                        <div class="project-content">
+                            <h5>E-commerce Sales Dashboard</h5>
+                            <p>Analyze a sales dataset to identify top-performing products and regions, then build an interactive Tableau dashboard for stakeholders.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?q=80&w=2070&auto=format&fit=crop" alt="Customer Churn Prediction">
+                        </div>
+                        <div class="project-content">
+                            <h5>Customer Churn Prediction</h5>
+                            <p>Use Python and machine learning to build a model that predicts which customers are likely to churn, helping a business take proactive measures.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop" alt="Marketing Campaign Analysis">
+                        </div>
+                        <div class="project-content">
+                            <h5>Marketing Campaign Analysis</h5>
+                            <p>Perform A/B testing analysis using SQL and statistical methods to determine the effectiveness of a digital marketing campaign.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Career Outcomes -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Your Future Career</p>
+                    <h2 class="section-title">Career Outcomes</h2>
+                </div>
+                <div class="careers-container">
+                    <span class="career-badge">Data Analyst</span>
+                    <span class="career-badge">Business Intelligence Analyst</span>
+                    <span class="career-badge">Marketing Analyst</span>
+                    <span class="career-badge">Financial Analyst</span>
+                    <span class="career-badge">Junior Data Scientist</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-content">
+                        <h2>Become a Data-Driven Decision Maker</h2>
+                        <p>Enroll now and gain the most in-demand skill of the 21st century. Your new career in data starts here.</p>
+                    </div>
+                    <div class="cta-button">
+                        <a href="Enroll/index.html" class="btn btn-light btn-lg">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>SKILL VANTIX</h5>
+                    <p>Empowering professionals with cutting-edge training and comprehensive career support to succeed in the technology industry.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html#programs">Programs</a></li>
+                        <li><a href="index.html#courses">Courses</a></li>
+                        <li><a href="pages/About.html">About Us</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="Career/index.html">Career Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Namakkal, Tamil Nadu</p>
+                    <p><i class="fas fa-phone"></i> +91 93609 94617</p>
+                    <p><i class="fas fa-envelope"></i> info@skillvantix.com</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to receive updates on new courses and career opportunities.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SKILL VANTIX. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

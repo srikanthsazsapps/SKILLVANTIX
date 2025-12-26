@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX Design Program | SKILL VANTIX</title>
+    
+    <meta name="description" content="Become a job-ready UI/UX Designer. Master user research, wireframing, prototyping, and visual design with Figma and Adobe XD in our hands-on course.">
+    <meta name="keywords" content="ui/ux design, figma, adobe xd, user research, wireframing, prototyping, design course">
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="UIUX.css">
+</head>
+<body>
+    <!-- Inline JavaScript for Animations -->
+    <script>
+        /* ========================================
+   UI/UX DESIGN PAGE - JAVASCRIPT
+   Interactive Features & Animations
+======================================== */
+
+(function() {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // ========================================
+        // Navigation Toggle
+        // ========================================
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        }
+
+        // ========================================
+        // Navbar Scroll Effect
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========================================
+        // Smooth Scrolling
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // Accordion Functionality
+        // ========================================
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const accordionItem = header.parentElement;
+                const isActive = accordionItem.classList.contains('active');
+
+                // Close all accordion items
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    accordionItem.classList.add('active');
+                }
+            });
+        });
+
+        // Open first accordion item by default
+        if (accordionHeaders.length > 0) {
+            accordionHeaders[0].parentElement.classList.add('active');
+        }
+
+        // ========================================
+        // Scroll Animations (Intersection Observer)
+        // ========================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // Trigger child animations
+                    const children = entry.target.querySelectorAll('.feature-card, .tech-item, .project-card, .accordion-item');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'none';
+                        }, index * 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        const sectionsToObserve = document.querySelectorAll('.section');
+        sectionsToObserve.forEach(section => {
+            observer.observe(section);
+        });
+
+        // ========================================
+        // Newsletter Form
+        // ========================================
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for subscribing! We\'ll keep you updated.');
+                newsletterForm.reset();
+            });
+        }
+
+     
+        const heroSection = document.querySelector('.hero-section');
+        if (heroSection) {
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.pageYOffset;
+                if (scrollPosition < heroSection.offsetHeight) {
+                    heroSection.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+                }
+            });
+        }
+
+        // ========================================
+        // Card Hover Effects (Desktop Only)
+        // ========================================
+        if (window.innerWidth > 768) {
+            const cards = document.querySelectorAll('.feature-card, .project-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 15;
+                    const rotateY = (centerX - x) / 15;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            });
+        }
+
+        // ========================================
+        // Floating Animation for Hero Icons
+        // ========================================
+        const factItems = document.querySelectorAll('.fact-item');
+        factItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // ========================================
+        // Keyboard Accessibility for Accordion
+        // ========================================
+        accordionHeaders.forEach((header, index) => {
+            header.setAttribute('tabindex', '0');
+            header.setAttribute('role', 'button');
+            header.setAttribute('aria-expanded', 'false');
+            
+            header.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    header.click();
+                }
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const nextHeader = accordionHeaders[index + 1];
+                    if (nextHeader) nextHeader.focus();
+                }
+                
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prevHeader = accordionHeaders[index - 1];
+                    if (prevHeader) prevHeader.focus();
+                }
+            });
+            
+            header.addEventListener('click', () => {
+                const isExpanded = header.parentElement.classList.contains('active');
+                header.setAttribute('aria-expanded', isExpanded);
+            });
+        });
+
+        // ========================================
+        // Dynamic Grid Animation
+        // ========================================
+        const featureGrid = document.querySelector('.feature-grid');
+        if (featureGrid) {
+            const gridObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const cards = entry.target.querySelectorAll('.feature-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0) scale(1)';
+                            }, index * 150);
+                        });
+                        gridObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            gridObserver.observe(featureGrid);
+        }
+
+        // ========================================
+        // Console Message
+        // ========================================
+        console.log('%c🎨 SKILL VANTIX - UI/UX Design Course ', 'background: #0A2540; color: #00D4FF; font-size: 16px; padding: 10px;');
+        console.log('%cDesign the future, one pixel at a time!', 'color: #0A2540; font-size: 14px;');
+
+    });
+
+})();
+    </script>
+
+    <!-- Navigation -->
+  <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
+                <!-- <span>SKILL VANTIX</span> -->
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link" href="../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-subtitle">UI/UX Design Program</p>
+                    <h1 class="hero-title">Design Products People Love to Use</h1>
+                    <p class="hero-description">Go beyond pixels and learn the art and science of creating intuitive, beautiful, and user-centered digital experiences that solve real-world problems.</p>
+                    <div class="hero-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="fact-text">
+                                <strong>Duration</strong>
+                                <span>4 Months</span>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-signal"></i>
+                            <div class="fact-text">
+                                <strong>Skill Level</strong>
+                                <span>Beginner</span>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-drafting-compass"></i>
+                            <div class="fact-text">
+                                <strong>Tools</strong>
+                                <span>Figma, Adobe XD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- What You Will Master Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Core Competencies</p>
+                    <h2 class="section-title">What You Will Master</h2>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Understand Your Users</h4>
+                        <p>Master user research, interviews, and personas to build deep empathy and uncover true user needs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4>Craft Beautiful Interfaces</h4>
+                        <p>Learn visual design principles, color theory, typography, and create pixel-perfect UIs with design systems.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-object-group"></i>
+                        </div>
+                        <h4>Build Seamless Interactions</h4>
+                        <p>Go from wireframes to high-fidelity, interactive prototypes that feel like real products.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h4>Validate Your Designs</h4>
+                        <p>Conduct usability testing, analyze feedback, and iterate on your designs based on real user data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Tools Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Tools of the Trade</p>
+                    <h2 class="section-title">Master Industry-Standard Design Tools</h2>
+                </div>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="Figma">
+                        <p>Figma</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/adobe-xd-2.svg" alt="Adobe XD">
+                        <p>Adobe XD</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/sketchapp/sketchapp-icon.svg" alt="Sketch">
+                        <p>Sketch</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/invisionapp/invisionapp-icon.svg" alt="InVision">
+                        <p>InVision</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/miro/miro-icon.svg" alt="Miro">
+                        <p>Miro</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/zeplinio/zeplinio-icon.svg" alt="Zeplin">
+                        <p>Zeplin</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Course Structure</p>
+                    <h2 class="section-title">Your Journey Through the Design Process</h2>
+                </div>
+                <div class="curriculum-wrapper">
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">01</span>
+                                <span class="accordion-title">Foundations of UX & Design Thinking</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Understand the core principles of user-centered design, learn the Design Thinking framework, and define user problems.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">02</span>
+                                <span class="accordion-title">User Research & Strategy</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Conduct user interviews, create personas and journey maps, and build a solid information architecture.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">03</span>
+                                <span class="accordion-title">Wireframing & Prototyping</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Translate your research into low-fidelity wireframes and build interactive, clickable prototypes to test user flows.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">04</span>
+                                <span class="accordion-title">Visual Design & UI Fundamentals</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Master color theory, typography, and layout principles. Learn to create design systems and apply branding to your interfaces.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">05</span>
+                                <span class="accordion-title">Usability Testing & Handoff</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Plan and conduct usability tests, analyze feedback for iteration, and prepare your final designs for developer handoff.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-number">06</span>
+                                <span class="accordion-title">Capstone Project & Portfolio Building</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Apply the entire design process to a real-world project, culminating in a portfolio-ready case study to showcase your skills.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Projects Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Build Your Portfolio</p>
+                    <h2 class="section-title">Hands-On Design Projects</h2>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Analytics Dashboard">
+                        </div>
+                        <div class="project-content">
+                            <h5>SaaS Analytics Dashboard</h5>
+                            <p>Design a complex, data-rich dashboard for a business intelligence tool, focusing on clear information hierarchy and data visualization.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1581006852262-5b98a8583b28?q=80&w=1964&auto=format&fit=crop" alt="Mobile App">
+                        </div>
+                        <div class="project-content">
+                            <h5>Mobile Wellness App</h5>
+                            <p>Research, design, and prototype a mobile app from scratch, focusing on user onboarding, engagement, and accessibility.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" alt="E-commerce Website">
+                        </div>
+                        <div class="project-content">
+                            <h5>E-commerce Website Redesign</h5>
+                            <p>Conduct a heuristic evaluation of an existing e-commerce site and redesign the user flow and interface for a better shopping experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-content">
+                        <h2>Ready to Start Designing the Future?</h2>
+                        <p>Enroll now to turn your passion for creativity and problem-solving into a highly rewarding career in design.</p>
+                    </div>
+                    <div class="cta-button">
+                        <a href="Enroll/index.html" class="btn btn-light btn-lg">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>SKILL VANTIX</h5>
+                    <p>Transforming careers through innovative training and skill development programs.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html#programs">Programs</a></li>
+                        <li><a href="index.html#courses">Courses</a></li>
+                        <li><a href="pages/About.html">About Us</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="Career/index.html">Career Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Namakkal, Tamil Nadu</p>
+                    <p><i class="fas fa-phone"></i> +91 93609 94617</p>
+                    <p><i class="fas fa-envelope"></i> info@skillvantix.com</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Newsletter</h5>
+                    <p>Stay updated with our latest courses.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SKILL VANTIX. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

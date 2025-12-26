@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Stack Development Course | SKILL VANTIX</title>
+    
+    <meta name="description" content="Become a job-ready Full Stack Developer. Master the MERN stack (MongoDB, Express, React, Node.js) with our hands-on, project-based course.">
+    <meta name="keywords" content="full stack development, mern stack, react, node.js, mongodb, web development course">
+    
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+    <!-- Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="FullStack.css">
+</head>
+<body>
+    <!-- Inline JavaScript for Animations -->
+    <script>
+        /* ========================================
+   FULL STACK PAGE - JAVASCRIPT
+   Scroll Animations & Interactions
+======================================== */
+
+(function() {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // ========================================
+        // Navigation Toggle
+        // ========================================
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+        }
+
+        // ========================================
+        // Navbar Scroll Effect
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========================================
+        // Smooth Scrolling
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // Scroll Animations using Intersection Observer
+        // ========================================
+        const config = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px',
+            animateOnce: true
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    
+                    if (config.animateOnce) {
+                        observer.unobserve(entry.target);
+                    }
+                } else if (!config.animateOnce) {
+                    entry.target.classList.remove('animated');
+                }
+            });
+        }, {
+            threshold: config.threshold,
+            rootMargin: config.rootMargin
+        });
+
+        function observeElements(selector) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        function initScrollAnimations() {
+            // Observe all animated sections
+            observeElements('.section-header');
+            observeElements('.feature-grid');
+            observeElements('.tech-grid');
+            observeElements('.accordion-container');
+            observeElements('.projects-grid');
+            observeElements('.cta-card');
+
+            console.log('✨ Full Stack page animations initialized');
+        }
+
+        // Initialize animations
+        initScrollAnimations();
+
+        // ========================================
+        // Accordion Functionality
+        // ========================================
+        const accordionButtons = document.querySelectorAll('.accordion-button');
+        
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const accordionItem = this.parentElement.parentElement;
+                const accordionContent = accordionItem.querySelector('.accordion-content');
+                const isActive = accordionItem.classList.contains('active');
+                
+                // Close all accordion items
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.accordion-content').style.maxHeight = null;
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    accordionItem.classList.add('active');
+                    accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // Open first accordion item by default
+        const firstAccordion = document.querySelector('.accordion-item');
+        if (firstAccordion) {
+            firstAccordion.classList.add('active');
+            const firstContent = firstAccordion.querySelector('.accordion-content');
+            firstContent.style.maxHeight = firstContent.scrollHeight + 'px';
+        }
+
+        // ========================================
+        // Feature Cards Progressive Animation
+        // ========================================
+        const featureObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const featureCards = entry.target.querySelectorAll('.feature-card');
+                    featureCards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                    featureObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const featureGrid = document.querySelector('.feature-grid');
+        if (featureGrid) {
+            featureObserver.observe(featureGrid);
+        }
+
+        // ========================================
+        // Newsletter Form
+        // ========================================
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for subscribing! We\'ll keep you updated on our courses.');
+                newsletterForm.reset();
+            });
+        }
+
+        // ========================================
+        // Parallax Hero Effect
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.querySelector('.hero-section');
+            
+            if (heroSection && scrolled < heroSection.offsetHeight) {
+                heroSection.style.backgroundPositionY = scrolled * 0.5 + 'px';
+            }
+        });
+    });
+
+})();
+    </script>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
+                <!-- <span>SKILL VANTIX</span> -->
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link" href="../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/About.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-subtitle">Full Stack Web Development Program</p>
+                    <h1 class="hero-title">Build Anything You Can Imagine</h1>
+                    <p class="hero-description">Master the MERN stack—MongoDB, Express, React, and Node.js—to design, build, and deploy complex, production-ready web applications from end to end.</p>
+                    <div class="hero-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="fact-text">
+                                <strong>Duration</strong>
+                                <span>6 Months</span>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-signal"></i>
+                            <div class="fact-text">
+                                <strong>Skill Level</strong>
+                                <span>Beginner</span>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <div class="fact-text">
+                                <strong>Format</strong>
+                                <span>Online, Live</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- What You Will Build Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Core Capabilities</p>
+                    <h2 class="section-title">What You Will Be Able to Build</h2>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h4>Dynamic Frontends</h4>
+                        <p>Craft beautiful, responsive, and fast user interfaces using the power of React.js and modern CSS.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h4>Robust Backends</h4>
+                        <p>Engineer scalable server-side applications, RESTful APIs, and manage server logic with Node.js and Express.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>Flexible Databases</h4>
+                        <p>Design and manage complex data models with both SQL and NoSQL databases like PostgreSQL and MongoDB.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4>Deployed Applications</h4>
+                        <p>Take your projects from local development to a live production environment using Docker and cloud platforms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Tools of the Trade</p>
+                    <h2 class="section-title">Technology You'll Master</h2>
+                </div>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" alt="React">
+                        <p>React</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg" alt="Node.js">
+                        <p>Node.js</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/express-109.svg" alt="Express">
+                        <p>Express</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg" alt="MongoDB">
+                        <p>MongoDB</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg" alt="JavaScript">
+                        <p>JavaScript</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" alt="Docker">
+                        <p>Docker</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Course Structure</p>
+                    <h2 class="section-title">Week-by-Week Curriculum</h2>
+                </div>
+                <div class="accordion-container">
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <button class="accordion-button">
+                                    <span class="accordion-number">01</span>
+                                    <span class="accordion-title">Module 1: Web Foundations & JavaScript</span>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </button>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Build a solid foundation with modern HTML5, CSS3, Flexbox, Grid, and master the fundamentals of JavaScript (ES6+).</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <button class="accordion-button">
+                                    <span class="accordion-number">02</span>
+                                    <span class="accordion-title">Module 2: Frontend Development with React</span>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </button>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Dive deep into React, learning about components, state management, hooks, and routing to build single-page applications.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <button class="accordion-button">
+                                    <span class="accordion-number">03</span>
+                                    <span class="accordion-title">Module 3: Backend with Node.js & Express</span>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </button>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Create powerful server-side applications and build secure, efficient RESTful APIs from scratch using Node.js and Express.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <button class="accordion-button">
+                                    <span class="accordion-number">04</span>
+                                    <span class="accordion-title">Module 4: Databases with MongoDB & SQL</span>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </button>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Learn to model and manage data using both NoSQL (MongoDB) and relational databases (PostgreSQL), and integrate them with your backend.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <button class="accordion-button">
+                                    <span class="accordion-number">05</span>
+                                    <span class="accordion-title">Module 5: Deployment & DevOps</span>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </button>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Master Git for version control, containerize your applications with Docker, and deploy them to cloud services like AWS or Heroku.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <button class="accordion-button">
+                                    <span class="accordion-number">06</span>
+                                    <span class="accordion-title">Module 6: Full-Stack Capstone Project</span>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </button>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Combine all your skills to design, develop, and deploy a complete, portfolio-worthy full-stack application from concept to launch.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Projects Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Build Your Portfolio</p>
+                    <h2 class="section-title">Hands-On Portfolio Projects</h2>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1585123334904-845d60e97b29?q=80&w=1935&auto=format&fit=crop" alt="E-commerce Platform">
+                        </div>
+                        <div class="project-content">
+                            <h5>E-commerce Platform</h5>
+                            <p>Build a complete online store with product listings, a shopping cart, user authentication, and a payment gateway integration.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1579820010410-c10418a41920?q=80&w=2070&auto=format&fit=crop" alt="Project Management Tool">
+                        </div>
+                        <div class="project-content">
+                            <h5>Project Management Tool</h5>
+                            <p>Create a Trello-like application with boards, lists, and draggable cards to manage tasks and collaborate in real-time.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop" alt="Social Media App">
+                        </div>
+                        <div class="project-content">
+                            <h5>Social Media App</h5>
+                            <p>Develop a social platform where users can create profiles, make posts, comment on others' posts, and follow friends.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-content">
+                        <h2>Ready to Build the Web's Future?</h2>
+                        <p>Enroll now to gain the most sought-after skill set in the tech industry and start building powerful applications.</p>
+                    </div>
+                    <div class="cta-button">
+                        <a href="/pages/Enroll.html" class="btn btn-light btn-lg">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>SKILL VANTIX</h5>
+                    <p>Transforming careers through innovative training and skill development programs.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="../index.html#programs">Programs</a></li>
+                        <li><a href="../index.html#courses">Courses</a></li>
+                        <li><a href="/pages/About.html">About Us</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-phone"></i> +91 93609 94617</p>
+                    <p><i class="fas fa-envelope"></i> successmeetsacademy@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Newsletter</h5>
+                    <p>Stay updated with our latest courses.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SKILL VANTIX. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

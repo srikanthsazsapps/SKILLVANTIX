@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Foundation Program | SKILL VANTIX</title>
+    
+    <meta name="description" content="Build a rock-solid technical foundation. Our program covers core programming, systems architecture, and development tools to prepare you for any specialized tech career.">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+    <!-- Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="technical.css">
+</head>
+<body>
+    <!-- Inline JavaScript for Animations -->
+    <script>
+        /* ========================================
+   TECHNICAL FOUNDATION PAGE - JAVASCRIPT
+   Scroll Animations & Interactions
+======================================== */
+
+(function() {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // ========================================
+        // Navigation Toggle
+        // ========================================
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+        }
+
+        // ========================================
+        // Navbar Scroll Effect
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========================================
+        // Smooth Scrolling
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // Scroll Animations using Intersection Observer
+        // ========================================
+        const config = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px',
+            animateOnce: true
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    
+                    if (config.animateOnce) {
+                        observer.unobserve(entry.target);
+                    }
+                } else if (!config.animateOnce) {
+                    entry.target.classList.remove('animated');
+                }
+            });
+        }, {
+            threshold: config.threshold,
+            rootMargin: config.rootMargin
+        });
+
+        function observeElements(selector) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        function initScrollAnimations() {
+            // Observe all animated sections
+            observeElements('.section-header');
+            observeElements('.feature-grid');
+            observeElements('.accordion-container');
+            observeElements('.pathway-grid');
+            observeElements('.cta-card');
+
+            console.log('✨ Technical Foundation page animations initialized');
+        }
+
+        // Initialize animations
+        initScrollAnimations();
+
+        // ========================================
+        // Accordion Functionality
+        // ========================================
+        const accordionButtons = document.querySelectorAll('.accordion-button');
+        
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const accordionItem = this.parentElement.parentElement;
+                const accordionContent = accordionItem.querySelector('.accordion-content');
+                const isActive = accordionItem.classList.contains('active');
+                
+                // Close all accordion items
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.accordion-content').style.maxHeight = null;
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    accordionItem.classList.add('active');
+                    accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // Open first accordion item by default
+        const firstAccordion = document.querySelector('.accordion-item');
+        if (firstAccordion) {
+            firstAccordion.classList.add('active');
+            const firstContent = firstAccordion.querySelector('.accordion-content');
+            firstContent.style.maxHeight = firstContent.scrollHeight + 'px';
+        }
+
+        // ========================================
+        // Feature Cards Progressive Animation
+        // ========================================
+        const featureObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const featureCards = entry.target.querySelectorAll('.feature-card');
+                    featureCards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                    featureObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const featureGrid = document.querySelector('.feature-grid');
+        if (featureGrid) {
+            featureObserver.observe(featureGrid);
+        }
+
+        // ========================================
+        // Parallax Hero Effect
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.querySelector('.hero-section');
+            
+            if (heroSection && scrolled < heroSection.offsetHeight) {
+                heroSection.style.backgroundPositionY = scrolled * 0.5 + 'px';
+            }
+        });
+    });
+
+})();
+    </script>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
+                <!-- <span>SKILL VANTIX</span> -->
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link active" href="../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/About.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-subtitle">Technical Foundation Program</p>
+                    <h1 class="hero-title">Build the Foundation for a Lifelong Career in Tech</h1>
+                    <p class="hero-description">Before you can build skyscrapers, you need to master the foundation. This program equips you with the universal technical principles that power every specialization in the industry.</p>
+                    <div class="hero-facts">
+                        <div class="fact-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="fact-text">
+                                <strong>Duration</strong>
+                                <span>8 Weeks</span>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-signal"></i>
+                            <div class="fact-text">
+                                <strong>Skill Level</strong>
+                                <span>Beginner</span>
+                            </div>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <div class="fact-text">
+                                <strong>Format</strong>
+                                <span>Live Online</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Why This Program Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Why This Program is Essential</p>
+                    <h2 class="section-title">Your Launchpad into Any Tech Role</h2>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h4>Speak the Language</h4>
+                        <p>Understand the core concepts of programming, networks, and databases that are common across all tech jobs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>Think Like an Engineer</h4>
+                        <p>Develop a structured, logical problem-solving mindset that is crucial for tackling complex technical challenges.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h4>Prepare to Specialize</h4>
+                        <p>Build the strong base needed to accelerate your learning in advanced fields like AI, cloud, or full-stack development.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4>Ace Technical Interviews</h4>
+                        <p>Gain the confidence to answer fundamental interview questions that trip up even experienced candidates.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Curriculum Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Program Structure</p>
+                    <h2 class="section-title">The Core Pillars of Our Training</h2>
+                </div>
+                <div class="accordion-container">
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <button class="accordion-button">
+                                    <span class="accordion-number">01</span>
+                                    <span class="accordion-title">Pillar 1: Programming & Logic</span>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </button>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Master the universal principles of coding. We cover variables, control flow, functions, and object-oriented concepts using Python, along with essential data structures and algorithms.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <button class="accordion-button">
+                                    <span class="accordion-number">02</span>
+                                    <span class="accordion-title">Pillar 2: Systems & Architecture</span>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </button>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Understand how everything fits together. Learn the basics of operating systems (Linux), computer networking (TCP/IP), and how databases (SQL) store and retrieve information.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <button class="accordion-button">
+                                    <span class="accordion-number">03</span>
+                                    <span class="accordion-title">Pillar 3: Development Lifecycle & Tools</span>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </button>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Learn how modern software is built. Get hands-on with the command line, manage your code with Git and GitHub, and understand the basics of the software development lifecycle (Agile).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Your Next Step Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Career Pathways</p>
+                    <h2 class="section-title">Your Next Step After This Program</h2>
+                </div>
+                <div class="pathway-grid">
+                    <div class="pathway-card">
+                        <div class="pathway-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4>Full Stack Development</h4>
+                        <p>With a solid foundation, you'll be perfectly prepared to master the MERN stack and build complete web applications.</p>
+                        <a href="../FullStack/index.html" class="btn btn-outline">View Program</a>
+                    </div>
+                    <div class="pathway-card">
+                        <div class="pathway-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h4>Data Analytics</h4>
+                        <p>Your new programming and database skills will give you a massive head start in learning to analyze data and build models.</p>
+                        <a href="../DataAnalytics/index.html" class="btn btn-outline">View Program</a>
+                    </div>
+                    <div class="pathway-card">
+                        <div class="pathway-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h4>Cloud & DevOps</h4>
+                        <p>Understanding systems and networks is the first step to specializing in cloud infrastructure, automation, and deployment.</p>
+                        <a href="../index.html#courses" class="btn btn-outline btn-disabled">Coming Soon</a>
+                    </div>
+                    <div class="pathway-card">
+                        <div class="pathway-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Cyber Security</h4>
+                        <p>Protect digital assets and combat cyber threats. Master security principles and industry-standard protection tools.</p>
+                        <a href="../CyberSecurity/index.html" class="btn btn-outline">View Program</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-content">
+                        <h2>Stop Feeling Overwhelmed. Start Building.</h2>
+                        <p>Enroll in the Technical Foundation Program and gain the confidence to succeed in any tech career you choose.</p>
+                    </div>
+                    <div class="cta-button">
+                        <a href="/pages/Enroll.html" class="btn btn-light btn-lg">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>SKILL VANTIX</h5>
+                    <p>Empowering professionals with cutting-edge training and comprehensive career support to succeed in the technology industry.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="../index.html#programs">Programs</a></li>
+                        <li><a href="../index.html#courses">Courses</a></li>
+                        <li><a href="/pages/About.html">About Us</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Andagaloregate, Near Rasipuram, Namakkal</p>
+                    <p><i class="fas fa-phone"></i> +91 93609 94617</p>
+                    <p><i class="fas fa-envelope"></i> successmeetsacademy@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to receive updates on new courses and career opportunities.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SKILL VANTIX. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

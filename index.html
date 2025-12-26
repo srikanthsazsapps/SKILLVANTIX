@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKILL VANTIX | Transform Your Career with Industry-Leading Training</title>
+
+    <meta name="description"
+        content="Premier training institution offering cutting-edge programs in Data Analytics, UI/UX Design, Full Stack Development, and placement preparation.">
+    <meta name="keywords"
+        content="placement training, data analytics course, ui/ux design training, full stack development, career transformation">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="animations-integration.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="/Image/logo1.jpg" alt="SKILL VANTIX Logo">
+                <!-- <span>SKILL VANTIX</span> -->
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link" href="#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/About.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contacts</a></li>
+                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <script>
+            
+
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const heroContent = document.querySelector(".hero-content");
+
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                            observer.unobserve(entry.target); // run once
+                        }
+                    });
+                }, { threshold: 0.4 });
+
+                observer.observe(heroContent);
+            });
+          
+            (function () {
+                'use strict';
+
+                // Configuration
+                const config = {
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -50px 0px',
+                    animateOnce: true
+                };
+
+                // Create intersection observer
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animated');
+
+                            if (config.animateOnce) {
+                                observer.unobserve(entry.target);
+                            }
+                        } else if (!config.animateOnce) {
+                            entry.target.classList.remove('animated');
+                        }
+                    });
+                }, {
+                    threshold: config.threshold,
+                    rootMargin: config.rootMargin
+                });
+
+                // Function to observe elements
+                function observeElements(selector) {
+                    const elements = document.querySelectorAll(selector);
+                    elements.forEach(element => {
+                        observer.observe(element);
+                    });
+                }
+
+                // Initialize animations when DOM is ready
+                function initScrollAnimations() {
+                    // Observe all sections that need animation
+                    observeElements('.section-header');
+                    observeElements('.stats-section');
+                    observeElements('.features-grid');
+                    observeElements('.programs-grid');
+                    observeElements('.tech-grid');
+                    observeElements('.about-content');
+                    observeElements('.contact-content');
+
+                    console.log('✨ Scroll animations initialized');
+                }
+
+                // Run on page load - integrate with existing DOMContentLoaded
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initScrollAnimations);
+                } else {
+                    initScrollAnimations();
+                }
+
+            })();
+        </script>
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-subtitle">Welcome to SKILL VANTIX</p>
+                    <h1 class="hero-title">Transform Your Career with Industry-Leading Training</h1>
+                    <p class="hero-description">Bridge the gap between academic knowledge and industry demands. Our
+                        comprehensive training programs equip you with cutting-edge skills and practical experience to
+                        excel in today's competitive tech landscape.</p>
+                    <div class="hero-buttons">
+                        <a href="#programs" class="btn btn-brand btn-lg">Explore Programs</a>
+                        <a href="#contact" class="btn btn-outline-light btn-lg">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const counters = document.querySelectorAll(".stat-number");
+                let started = false;
+
+                const startCount = () => {
+                    if (started) return;
+                    started = true;
+
+                    counters.forEach(counter => {
+                        const target = +counter.dataset.target;
+                        const suffix = counter.dataset.suffix || '+';
+                        let count = 0;
+
+                        const update = () => {
+                            const increment = target / 80;
+                            count += increment;
+
+                            if (count < target) {
+                                counter.textContent = Math.ceil(count) + (suffix || '');
+                                requestAnimationFrame(update);
+                            } else {
+                                counter.textContent = target + (suffix || '');
+                            }
+                        };
+
+                        update();
+                    });
+                };
+
+                const observer = new IntersectionObserver(entries => {
+                    if (entries[0].isIntersecting) startCount();
+                }, { threshold: 0.5 });
+
+                observer.observe(document.querySelector(".stats-section"));
+            });
+        </script>
+
+        <!-- Stats Banner -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h2 class="stat-number" data-target="10">0</h2>
+                        <p class="stat-label">Training Programs</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2 class="stat-number" data-target="250">0</h2>
+                        <p class="stat-label">Successful Students</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2 class="stat-number" data-target="95" data-suffix="%">0</h2>
+                        <p class="stat-label">Placement Success Rate</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2 class="stat-number" data-target="25">0</h2>
+                        <p class="stat-label">Industry Partners</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-us" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Why Choose Us</p>
+                    <h2 class="section-title">Excellence in Professional Training</h2>
+                    <p class="section-description">We combine industry expertise, proven methodologies, and personalized
+                        support to ensure your success in the technology sector.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h4 class="feature-title">Expert-Led Training</h4>
+                        <p class="feature-text">Learn from industry professionals with extensive real-world experience.
+                            Our instructors bring practical insights and current industry practices directly to your
+                            learning experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h4 class="feature-title">Career-Focused Curriculum</h4>
+                        <p class="feature-text">Every course is designed around in-demand industry skills. Build a
+                            professional portfolio and gain hands-on experience that employers actively seek.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4 class="feature-title">Comprehensive Placement Support</h4>
+                        <p class="feature-text">From resume optimization to interview preparation, we provide end-to-end
+                            career support to help you secure your dream role in the tech industry.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h4 class="feature-title">Project-Based Learning</h4>
+                        <p class="feature-text">Work on real-world projects that mirror actual industry scenarios. Build
+                            a portfolio that demonstrates your capabilities to potential employers.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h4 class="feature-title">Industry-Recognized Certification</h4>
+                        <p class="feature-text">Earn certifications that validate your expertise and enhance your
+                            professional credibility in the competitive job market.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 class="feature-title">Lifetime Learning Community</h4>
+                        <p class="feature-text">Join a network of professionals and alumni. Continue learning and
+                            growing through ongoing mentorship and community support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Placement Training Section -->
+        <section id="programs" class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Placement Training Programs</p>
+                    <h2 class="section-title">Comprehensive Career Preparation</h2>
+                    <p class="section-description">Our structured placement training programs prepare you for every
+                        aspect of the recruitment process, from aptitude tests to technical interviews.</p>
+                </div>
+                <div class="programs-grid">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <i class="fas fa-brain course-icon"></i>
+                            <h4 class="course-title">Aptitude Training</h4>
+                        </div>
+                        <div class="course-body">
+                            <p class="course-description">Master quantitative aptitude, logical reasoning, and verbal
+                                ability to excel in placement tests and competitive examinations.</p>
+                            <ul class="course-features">
+                                <li><i class="fas fa-check-circle"></i> Quantitative Analysis & Problem Solving</li>
+                                <li><i class="fas fa-check-circle"></i> Logical & Analytical Reasoning</li>
+                                <li><i class="fas fa-check-circle"></i> Verbal Ability & Comprehension</li>
+                                <li><i class="fas fa-check-circle"></i> Mock Tests & Performance Analysis</li>
+                            </ul>
+                            <a href="/pages/Aptitude.html" class="btn btn-outline">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-header">
+                            <i class="fas fa-comments course-icon"></i>
+                            <h4 class="course-title">Soft Skills Development</h4>
+                        </div>
+                        <div class="course-body">
+                            <p class="course-description">Develop essential interpersonal skills, professional
+                                communication, and leadership abilities for corporate excellence.</p>
+                            <ul class="course-features">
+                                <li><i class="fas fa-check-circle"></i> Professional Communication Skills</li>
+                                <li><i class="fas fa-check-circle"></i> Leadership & Team Collaboration</li>
+                                <li><i class="fas fa-check-circle"></i> Corporate Etiquette & Professionalism</li>
+                                <li><i class="fas fa-check-circle"></i> Presentation & Public Speaking</li>
+                            </ul>
+                            <a href="/pages/SoftSkill.html" class="btn btn-outline">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-header">
+                            <i class="fas fa-laptop-code course-icon"></i>
+                            <h4 class="course-title">Technical Foundation</h4>
+                        </div>
+                        <div class="course-body">
+                            <p class="course-description">Build a strong technical foundation with core programming
+                                concepts, development tools, and industry best practices.</p>
+                            <ul class="course-features">
+                                <li><i class="fas fa-check-circle"></i> Programming Fundamentals</li>
+                                <li><i class="fas fa-check-circle"></i> Data Structures & Algorithms</li>
+                                <li><i class="fas fa-check-circle"></i> Industry-Standard Development Tools</li>
+                                <li><i class="fas fa-check-circle"></i> Hands-On Project Experience</li>
+                            </ul>
+                            <a href="/pages/Technical.html" class="btn btn-outline">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section id="courses" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Specialized Technology Courses</p>
+                    <h2 class="section-title">Advanced Professional Training Tracks</h2>
+                    <p class="section-description">Industry-aligned courses designed to transform you into a job-ready
+                        professional in high-demand technology domains.</p>
+                </div>
+                <div class="courses-container">
+                    <button class="scroll-btn scroll-left" id="scrollLeft" aria-label="Scroll Left">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="courses-scroll-wrapper" id="coursesWrapper">
+                        <div class="courses-grid courses-scroll">
+                            <div class="course-card">
+                                <div class="course-header">
+                                    <i class="fas fa-code course-icon"></i>
+                                    <h4 class="course-title">Full Stack Development</h4>
+                                </div>
+                                <div class="course-body">
+                                    <p class="course-description">Master end-to-end web development with modern
+                                        technologies. Build scalable applications from front-end to back-end.</p>
+                                    <ul class="course-features">
+                                        <li><i class="fas fa-check-circle"></i> HTML5, CSS3, JavaScript (ES6+)</li>
+                                        <li><i class="fas fa-check-circle"></i> React.js & Modern Frontend</li>
+                                        <li><i class="fas fa-check-circle"></i> Node.js, Express & RESTful APIs</li>
+                                        <li><i class="fas fa-check-circle"></i> MongoDB & Database Management</li>
+                                        <li><i class="fas fa-check-circle"></i> Deployment & DevOps Essentials</li>
+                                    </ul>
+                                    <div class="course-meta">
+                                        <span class="course-duration"><i class="fas fa-clock"></i> 6 Months</span>
+                                        <span class="course-badge badge-primary">Best Seller</span>
+                                    </div>
+                                    <a href="/pages/FullStack.html" class="btn btn-outline btn-full">Explore Course</a>
+                                </div>
+                            </div>
+                            <div class="course-card">
+                                <div class="course-header">
+                                    <i class="fas fa-chart-line course-icon"></i>
+                                    <h4 class="course-title">Data Analytics</h4>
+                                </div>
+                                <div class="course-body">
+                                    <p class="course-description">Transform raw data into strategic insights. Master
+                                        analytics tools and techniques to drive business decisions.</p>
+                                    <ul class="course-features">
+                                        <li><i class="fas fa-check-circle"></i> Python for Data Science & Analysis</li>
+                                        <li><i class="fas fa-check-circle"></i> SQL & Database Querying</li>
+                                        <li><i class="fas fa-check-circle"></i> Tableau & Power BI Visualization</li>
+                                        <li><i class="fas fa-check-circle"></i> Statistical Analysis & Modeling</li>
+                                        <li><i class="fas fa-check-circle"></i> Machine Learning Fundamentals</li>
+                                    </ul>
+                                    <div class="course-meta">
+                                        <span class="course-duration"><i class="fas fa-clock"></i> 6 Months</span>
+                                        <span class="course-badge badge-success">High Demand</span>
+                                    </div>
+                                    <a href="/pages/DataAnalytics.html" class="btn btn-outline btn-full">Explore
+                                        Course</a>
+                                </div>
+                            </div>
+                            <div class="course-card">
+                                <div class="course-header">
+                                    <i class="fas fa-drafting-compass course-icon"></i>
+                                    <h4 class="course-title">UI/UX Design</h4>
+                                </div>
+                                <div class="course-body">
+                                    <p class="course-description">Create exceptional user experiences. Learn design
+                                        thinking and master industry-standard design tools.</p>
+                                    <ul class="course-features">
+                                        <li><i class="fas fa-check-circle"></i> User Research & Design Thinking</li>
+                                        <li><i class="fas fa-check-circle"></i> Wireframing & Prototyping</li>
+                                        <li><i class="fas fa-check-circle"></i> Visual Design & Typography</li>
+                                        <li><i class="fas fa-check-circle"></i> Figma & Adobe XD Mastery</li>
+                                        <li><i class="fas fa-check-circle"></i> Usability Testing & Iteration</li>
+                                    </ul>
+                                    <div class="course-meta">
+                                        <span class="course-duration"><i class="fas fa-clock"></i> 4 Months</span>
+                                        <span class="course-badge badge-info">Creative Track</span>
+                                    </div>
+                                    <a href="/pages/UIUX.html" class="btn btn-outline btn-full">Explore Course</a>
+                                </div>
+                            </div>
+                            <div class="course-card">
+                                <div class="course-header">
+                                    <i class="fas fa-shield-alt course-icon"></i>
+                                    <h4 class="course-title">Cyber Security</h4>
+                                </div>
+                                <div class="course-body">
+                                    <p class="course-description">Protect digital assets and combat cyber threats.
+                                        Master security principles and industry-standard protection tools.</p>
+                                    <ul class="course-features">
+                                        <li><i class="fas fa-check-circle"></i> Network Security & Protocols</li>
+                                        <li><i class="fas fa-check-circle"></i> Ethical Hacking & Penetration Testing
+                                        </li>
+                                        <li><i class="fas fa-check-circle"></i> Security Operations & Incident Response
+                                        </li>
+                                        <li><i class="fas fa-check-circle"></i> Cryptography & Data Protection</li>
+                                        <li><i class="fas fa-check-circle"></i> Security Compliance & Risk Management
+                                        </li>
+                                    </ul>
+                                    <div class="course-meta">
+                                        <span class="course-duration"><i class="fas fa-clock"></i> 6 Months</span>
+                                        <span class="course-badge badge-danger">Hot Career</span>
+                                    </div>
+                                    <a href="pages/Cyber.html" class="btn btn-outline btn-full">Explore
+                                        Course</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="scroll-btn scroll-right" id="scrollRight" aria-label="Scroll Right">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section section-light">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&auto=format&fit=crop"
+                            alt="SKILL VANTIX Training Environment">
+                    </div>
+                    <div class="about-text">
+                        <div class="section-header section-header-left">
+                            <p class="section-subtitle">About SKILL VANTIX</p>
+                            <h2 class="section-title">Shaping Tomorrow's Technology Leaders</h2>
+                        </div>
+                        <p class="about-lead">We are a premier training institution committed to excellence in
+                            professional development and career transformation.</p>
+                        <p>SKILL VANTIX bridges the critical gap between academic education and industry requirements.
+                            Our comprehensive training programs combine theoretical knowledge with practical
+                            application, ensuring our students are not just job-ready but career-ready.</p>
+                        <p>With a team of experienced industry professionals, cutting-edge curriculum, and proven
+                            placement support, we have successfully transformed the careers of over 1,000 professionals
+                            across various technology domains.</p>
+                        <a href="/pages/About.html" class="btn btn-brand">Learn More About Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Technology Ecosystem</p>
+                    <h2 class="section-title">Industry-Standard Tools & Technologies</h2>
+                    <p class="section-description">Gain expertise in the most sought-after technologies used by leading
+                        companies worldwide.</p>
+                </div>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/python/python-icon.svg" alt="Python">
+                        <p>Python</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg" alt="JavaScript">
+                        <p>JavaScript</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" alt="React">
+                        <p>React</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg" alt="Node.js">
+                        <p>Node.js</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" alt="Docker">
+                        <p>Docker</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/mysql/mysql-icon.svg" alt="MySQL">
+                        <p>MySQL</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Get in Touch</p>
+                    <h2 class="section-title">Start Your Journey with Us</h2>
+                    <p class="section-description">Have questions about our programs? Our team is here to help you
+                        choose the right path for your career goals.</p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-form-wrapper">
+                        <h4>Send Us a Message</h4>
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email address"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" placeholder="How can we help you?"
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-brand btn-full">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="contact-info">
+                        <h4>Contact Information</h4>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h5>Our Location</h5>
+                                <p>Andagaloregate, Near Rasipuram<br>Namakkal, Tamil Nadu - 637018</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h5>Call Us</h5>
+                                <p>+91 93609 94617<br>+91 93604 05503</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h5>Email Us</h5>
+                                <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="ddaea8bebeb8aeaeb0b8b8a9aebcbebcb9b8b0a49dbab0bcb4b1f3beb2b0">[email&#160;protected]</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h5>Business Hours</h5>
+                                <p>Monday - Saturday: 9:00 AM - 6:00 PM<br>Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>SKILL VANTIX</h5>
+                    <p>Empowering professionals with cutting-edge training and comprehensive career support to succeed
+                        in the technology industry.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="About/index.html">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="Career/index.html">Career Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Namakkal, Tamil Nadu</p>
+                    <p><i class="fas fa-phone"></i> +91 93609 94617</p>
+                    <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                            data-cfemail="9feceafcfcfaececf2fafaebecfefcfefbfaf2e6dff8f2fef6f3b1fcf0f2">[email&#160;protected]</a>
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to receive updates on new courses and career opportunities.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SKILL VANTIX. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Course Cards Scrolling (Automatic with manual controls)
+        const coursesWrapper = document.getElementById('coursesWrapper');
+        const scrollLeftBtn = document.getElementById('scrollLeft');
+        const scrollRightBtn = document.getElementById('scrollRight');
+
+        if (coursesWrapper && scrollLeftBtn && scrollRightBtn) {
+            let currentIndex = 0;
+            const totalCards = 4;
+            let autoScrollInterval = null;
+            let visibleCards = 3; // Default for desktop
+
+            function updateVisibleCards() {
+                const width = window.innerWidth;
+                if (width >= 1200) {
+                    visibleCards = 3;
+                } else if (width >= 768) {
+                    visibleCards = 2;
+                } else {
+                    visibleCards = 1;
+                }
+            }
+
+            function getCardWidth() {
+                const cards = document.querySelectorAll('.course-card');
+                if (cards.length > 0) {
+                    const gap = window.innerWidth >= 768 ? 30 : 20;
+                    return cards[0].offsetWidth + gap;
+                }
+                return 400;
+            }
+
+            function updateScrollButtons() {
+                scrollLeftBtn.disabled = currentIndex === 0;
+                scrollRightBtn.disabled = currentIndex >= totalCards - visibleCards;
+            }
+
+            function scrollToIndex(index) {
+                updateVisibleCards();
+
+                if (index < 0) index = 0;
+                if (index > totalCards - visibleCards) index = totalCards - visibleCards;
+
+                const cardWidth = getCardWidth();
+                const scrollAmount = cardWidth * index;
+
+                coursesWrapper.scrollTo({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+
+                currentIndex = index;
+                updateScrollButtons();
+            }
+
+            function startAutoScroll() {
+                // Clear any existing interval
+                if (autoScrollInterval) {
+                    clearInterval(autoScrollInterval);
+                }
+
+                autoScrollInterval = setInterval(() => {
+                    updateVisibleCards();
+                    if (currentIndex >= totalCards - visibleCards) {
+                        // Reset to beginning
+                        currentIndex = -1;
+                    }
+                    scrollToIndex(currentIndex + 1);
+                }, 3500); // Auto scroll every 3.5 seconds
+            }
+
+            function stopAutoScroll() {
+                if (autoScrollInterval) {
+                    clearInterval(autoScrollInterval);
+                    autoScrollInterval = null;
+                }
+            }
+
+            // Manual controls
+            scrollLeftBtn.addEventListener('click', () => {
+                stopAutoScroll();
+                scrollToIndex(currentIndex - 1);
+                setTimeout(startAutoScroll, 1500);
+            });
+
+            scrollRightBtn.addEventListener('click', () => {
+                stopAutoScroll();
+                scrollToIndex(currentIndex + 1);
+                setTimeout(startAutoScroll, 1500);
+            });
+
+            // Pause on hover, resume on leave
+            coursesWrapper.addEventListener('mouseenter', () => {
+                stopAutoScroll();
+            });
+
+            coursesWrapper.addEventListener('mouseleave', () => {
+                startAutoScroll();
+            });
+
+            // Handle touch events for mobile
+            coursesWrapper.addEventListener('touchstart', () => {
+                stopAutoScroll();
+            });
+
+            coursesWrapper.addEventListener('touchend', () => {
+                setTimeout(startAutoScroll, 2000);
+            });
+
+            // Initialize on page load
+            setTimeout(() => {
+                updateVisibleCards();
+                updateScrollButtons();
+                startAutoScroll();
+            }, 500);
+
+            // Update on window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    updateVisibleCards();
+                    // Reset to valid index if needed
+                    if (currentIndex > totalCards - visibleCards) {
+                        currentIndex = Math.max(0, totalCards - visibleCards);
+                    }
+                    scrollToIndex(currentIndex);
+                }, 250);
+            });
+        }
+
+
+        // Form submissions
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDe
+            fault();
+            alert('Thank you for contacting us! We will get back to you shortly.');
+            e.target.reset();
+        });
+        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            e.target.reset();
+        });     
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | SKILL VANTIX</title>
+    
+    <meta name="description" content="Learn about the mission, vision, and values of SKILL VANTIX. Meet our team of expert instructors dedicated to your career success.">
+    <meta name="keywords" content="about SKILL VANTIX, training institution, tech education, career development">
+    
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="about.css">
+</head>
+<body>
+    <script>/* ========================================
+   ABOUT PAGE - JAVASCRIPT
+   Scroll Animations & Navigation
+======================================== */
+
+(function() {
+    'use strict';
+
+    // ========================================
+    // Navigation Toggle
+    // ========================================
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+    }
+
+    // ========================================
+    // Navbar Scroll Effect
+    // ========================================
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // ========================================
+    // Smooth Scrolling
+    // ========================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // ========================================
+    // Scroll Animations
+    // ========================================
+    const config = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px',
+        animateOnce: true
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                
+                if (config.animateOnce) {
+                    observer.unobserve(entry.target);
+                }
+            } else if (!config.animateOnce) {
+                entry.target.classList.remove('animated');
+            }
+        });
+    }, {
+        threshold: config.threshold,
+        rootMargin: config.rootMargin
+    });
+
+    function observeElements(selector) {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+            observer.observe(element);
+        });
+    }
+
+    function initScrollAnimations() {
+        // Observe all animated sections
+        observeElements('.section-header');
+        observeElements('.story-content');
+        observeElements('.mission-vision-grid');
+        observeElements('.values-grid');
+        observeElements('.team-intro');
+        observeElements('.team-features');
+        observeElements('.stats-grid');
+        observeElements('.cta-card');
+
+        console.log('✨ About page animations initialized');
+    }
+
+    // Initialize animations when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollAnimations);
+    } else {
+        initScrollAnimations();
+    }
+
+    // ========================================
+    // Newsletter Form
+    // ========================================
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = newsletterForm.querySelector('input[type="email"]').value;
+            
+            // Here you would typically send the email to your backend
+            alert('Thank you for subscribing! We\'ll keep you updated.');
+            newsletterForm.reset();
+        });
+    }
+
+    // ========================================
+    // Number Counter Animation (for Stats)
+    // ========================================
+    function animateCounter(element, target, duration = 2000) {
+        const start = 0;
+        const increment = target / (duration / 16);
+        let current = start;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                element.textContent = target + (element.textContent.includes('+') ? '+' : '%');
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(current) + (element.textContent.includes('+') ? '+' : '%');
+            }
+        }, 16);
+    }
+
+    // Trigger counter animation when stats section is visible
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statNumbers = entry.target.querySelectorAll('.stat-number');
+                statNumbers.forEach(stat => {
+                    const text = stat.textContent;
+                    const value = parseInt(text.replace(/\D/g, ''));
+                    if (value) {
+                        stat.textContent = '0' + (text.includes('+') ? '+' : text.includes('%') ? '%' : '');
+                        animateCounter(stat, value);
+                    }
+                });
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.querySelector('.stats-grid');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+
+})();</script>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
+                <!-- <span>SKILL VANTIX</span> -->
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link" href="../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle">About Us</p>
+                <h1 class="hero-title">Our Story, Your Success</h1>
+                <p class="hero-description">Discover the passion, mission, and people behind SKILL VANTIX.</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Our Story Section -->
+        <section class="section">
+            <div class="container">
+                <div class="story-content">
+                    <div class="story-text">
+                        <div class="section-header section-header-left">
+                            <p class="section-subtitle">Who We Are</p>
+                            <h2 class="section-title">Pioneering the Future of Tech Education</h2>
+                        </div>
+                        <p class="lead">SKILL VANTIX was founded on a simple yet powerful idea: education should directly translate to career success.</p>
+                        <p>Frustrated by the disconnect between traditional academic learning and the fast-paced demands of the tech industry, our founders envisioned an academy that would bridge this gap.</p>
+                        <p>We are a team of industry veterans, passionate educators, and career coaches dedicated to empowering the next generation of tech professionals with practical, in-demand skills that make a real difference in their careers.</p>
+                    </div>
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="Team collaborating on a project">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission & Vision Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="mission-vision-grid">
+                    <div class="mission-card">
+                        <div class="card-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Our Mission</h3>
+                        <p>To bridge the skill gap by providing innovative, industry-aligned training programs that empower professionals with the cutting-edge knowledge and practical expertise needed to thrive in their careers and contribute meaningfully to the technology sector.</p>
+                    </div>
+                    <div class="vision-card">
+                        <div class="card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Our Vision</h3>
+                        <p>To be a leading global institution for skill development, recognized for our commitment to excellence, innovation, and fostering a vibrant community of successful, lifelong learners who shape the future of technology.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Our Values Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Our Principles</p>
+                    <h2 class="section-title">Core Values That Guide Us</h2>
+                    <p class="section-description">These fundamental values shape every decision we make and define our approach to education and professional development.</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-fist-raised"></i>
+                        </div>
+                        <h4>Integrity</h4>
+                        <p>Upholding the highest standards of honesty and ethical conduct in all our actions, ensuring transparency and trust in every interaction.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4>Innovation</h4>
+                        <p>Embracing creativity and new ideas to continuously enhance the learning experience and stay ahead of industry trends.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>Excellence</h4>
+                        <p>Committing to the highest quality in our curriculum, teaching methodologies, and student support services.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Collaboration</h4>
+                        <p>Fostering a community where students and instructors work together, share knowledge, and achieve mutual success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Our Expert Team Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Our Experts</p>
+                    <h2 class="section-title">The Minds Behind Your Success</h2>
+                </div>
+                <div class="team-intro">
+                    <p class="lead">Our instructors aren't just teachers; they are seasoned industry professionals from leading tech companies.</p>
+                    <p>They bring years of hands-on experience in software development, data science, and product design directly into the classroom. This ensures our curriculum is always current, practical, and aligned with what employers are looking for.</p>
+                    <p>You learn from the best to become the best. Our team is passionate about not just teaching concepts, but mentoring the next generation of technology leaders.</p>
+                </div>
+                <div class="team-features">
+                    <div class="team-feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h5>Industry Experience</h5>
+                        <p>Average 10+ years of professional experience in leading tech companies</p>
+                    </div>
+                    <div class="team-feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h5>Teaching Excellence</h5>
+                        <p>Passionate educators committed to student success and learning outcomes</p>
+                    </div>
+                    <div class="team-feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h5>Mentorship Focus</h5>
+                        <p>Dedicated to guiding and supporting your entire career journey</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const counters = document.querySelectorAll(".stat-number");
+                let started = false;
+
+                const startCount = () => {
+                    if (started) return;
+                    started = true;
+
+                    counters.forEach(counter => {
+                        const target = +counter.dataset.target;
+const suffix = counter.dataset.suffix || '+';
+                        let count = 0;
+
+                        const update = () => {
+                            const increment = target / 80;
+                            count += increment;
+
+                            if (count < target) {
+                                counter.textContent = Math.ceil(count) + (suffix || '');
+                                requestAnimationFrame(update);
+                            } else {
+                                counter.textContent = target + (suffix || '');
+                            }
+                        };
+
+                        update();
+                    });
+                };
+
+                const observer = new IntersectionObserver(entries => {
+                    if (entries[0].isIntersecting) startCount();
+                }, { threshold: 0.5 });
+
+                observer.observe(document.querySelector(".stats-section"));
+            });
+        </script>
+
+        <!-- Stats Section -->
+        <section class="section stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h2 class="stat-number" data-target="10">0</h2>
+                        <p class="stat-label">Training Programs</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2 class="stat-number" data-target="250">0</h2>
+                        <p class="stat-label">Successful Students</p>
+                    </div>
+                    <div class="stat-item">
+<h2 class="stat-number" data-target="95" data-suffix="%">0</h2>
+                        <p class="stat-label">Placement Rate</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2 class="stat-number" data-target="25">0</h2>
+                        <p class="stat-label">Industry Partners</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-content">
+                        <h2>Ready to Transform Your Career?</h2>
+                        <p>Join hundreds of successful graduates who started their journey with us. Explore our courses and find the perfect path for you.</p>
+                    </div>
+                    <div class="cta-button">
+                        <a href="../index.html#courses" class="btn btn-light btn-lg">Explore Courses</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>SKILL VANTIX</h5>
+                    <p>Empowering professionals with cutting-edge training and comprehensive career support to succeed in the technology industry.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="../index.html#programs">Programs</a></li>
+                        <li><a href="../index.html#courses">Courses</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                        <li><a href="../Career/index.html">Career Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Namakkal, Tamil Nadu</p>
+                    <p><i class="fas fa-phone"></i> +91 93609 94617</p>
+                    <p><i class="fas fa-envelope"></i> info@skillvantix.com</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to receive updates on new courses and career opportunities.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SKILL VANTIX. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="about.js"></script>
+
+</body>
+</html>

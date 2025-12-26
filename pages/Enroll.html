@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment | SKILL VANTIX</title>
+    
+    <meta name="description" content="Enroll in a program at SKILL VANTIX and take the first step towards transforming your career. Secure your spot today.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="Enroll.css">
+</head>
+<body>
+    <!-- Inline JavaScript -->
+    <script>
+        /* ========================================
+   ENROLLMENT PAGE - JAVASCRIPT
+   Form Handling & Interactions
+======================================== */
+
+(function() {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // ========================================
+        // Navigation Toggle
+        // ========================================
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        }
+
+        // ========================================
+        // Navbar Scroll Effect
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========================================
+        // Program Type Selection
+        // ========================================
+        const programTypeInputs = document.querySelectorAll('input[name="programType"]');
+        const courseOptions = document.getElementById('courseOptions');
+
+        programTypeInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                if (input.checked) {
+                    courseOptions.style.display = 'block';
+                    courseOptions.classList.add('fade-in');
+                }
+            });
+        });
+
+        // ========================================
+        // Form Validation & Submission
+        // ========================================
+        const enrollmentForm = document.getElementById('enrollmentForm');
+        const submitButton = document.getElementById('submitButton');
+        const successModal = document.getElementById('successModal');
+        const modalOverlay = document.getElementById('modalOverlay');
+
+        if (enrollmentForm) {
+            enrollmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Validate form
+                if (!enrollmentForm.checkValidity()) {
+                    enrollmentForm.classList.add('was-validated');
+                    return;
+                }
+
+                // Check if program type is selected
+                const programType = document.querySelector('input[name="programType"]:checked');
+                if (!programType) {
+                    alert('Please select a program type');
+                    return;
+                }
+
+                // Check if course is selected
+                const courseSelect = document.getElementById('courseSelect');
+                if (!courseSelect.value) {
+                    alert('Please select a course');
+                    return;
+                }
+
+                // Check terms
+                const terms = document.getElementById('terms');
+                if (!terms.checked) {
+                    alert('Please agree to the Terms of Service and Privacy Policy');
+                    return;
+                }
+
+                // Show loading state
+                const buttonText = submitButton.querySelector('.button-text');
+                const spinner = submitButton.querySelector('.spinner');
+                buttonText.style.display = 'none';
+                spinner.style.display = 'inline-block';
+                submitButton.disabled = true;
+
+                // Simulate form submission (replace with actual API call)
+                setTimeout(() => {
+                    // Hide loading state
+                    buttonText.style.display = 'inline';
+                    spinner.style.display = 'none';
+                    submitButton.disabled = false;
+
+                    // Show success modal
+                    successModal.classList.add('active');
+                    modalOverlay.classList.add('active');
+
+                    // Reset form
+                    enrollmentForm.reset();
+                    enrollmentForm.classList.remove('was-validated');
+                    courseOptions.style.display = 'none';
+                }, 1500);
+            });
+        }
+
+        // ========================================
+        // Modal Close Handlers
+        // ========================================
+        const closeModalBtn = document.getElementById('closeModal');
+        const backToHomeBtn = document.getElementById('backToHome');
+
+        function closeModal() {
+            successModal.classList.remove('active');
+            modalOverlay.classList.remove('active');
+        }
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
+
+        if (backToHomeBtn) {
+            backToHomeBtn.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+        }
+
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', closeModal);
+        }
+
+        // ========================================
+        // Form Input Animations
+        // ========================================
+        const formInputs = document.querySelectorAll('.form-control, .form-select');
+        formInputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focused');
+            });
+
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.parentElement.classList.remove('focused');
+                }
+            });
+        });
+
+        // ========================================
+        // Console Message
+        // ========================================
+        console.log('%c🎓 SKILL VANTIX - Enrollment ', 'background: #0A2540; color: #00D4FF; font-size: 16px; padding: 10px;');
+        console.log('%cWelcome! Start your transformation today.', 'color: #0A2540; font-size: 14px;');
+    });
+
+})();
+    </script>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
+                <!-- <span>SKILL VANTIX</span> -->
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link active" href="../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/About.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="enrollment-grid">
+                <!-- Left Column - Form -->
+                <div class="form-column">
+                    <div class="form-container">
+                        <div class="form-header">
+                            <h2>Take the Final Step</h2>
+                            <p>You're one step away from transforming your career. Fill out the form below to secure your spot.</p>
+                        </div>
+                        
+                        <form id="enrollmentForm" novalidate>
+                            <!-- Personal Details -->
+                            <div class="form-section">
+                                <h4>Personal Details</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="firstName">First Name*</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Last Name*</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Contact Information -->
+                            <div class="form-section">
+                                <h4>Contact Information</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email">Email Address*</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number*</label>
+                                        <input type="tel" class="form-control" id="phone" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Course Selection -->
+                            <div class="form-section">
+                                <h4>Course Selection</h4>
+                                <label class="section-label">Select Program Type*</label>
+                                <div class="program-type-options">
+                                    <div class="program-option">
+                                        <input type="radio" class="radio-input" name="programType" id="placementTraining" value="Placement Training" required>
+                                        <label class="radio-label" for="placementTraining">
+                                            <i class="fas fa-briefcase"></i>
+                                            <span>Placement Training</span>
+                                        </label>
+                                    </div>
+                                    <div class="program-option">
+                                        <input type="radio" class="radio-input" name="programType" id="specializedCourse" value="Specialized Course" required>
+                                        <label class="radio-label" for="specializedCourse">
+                                            <i class="fas fa-star"></i>
+                                            <span>Specialized Course</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div id="courseOptions" class="course-select-wrapper">
+                                    <label for="courseSelect">Select Your Course*</label>
+                                    <select class="form-select" id="courseSelect">
+                                        <option value="" selected disabled>-- Choose a course --</option>
+                                        <option value="Full Stack Development">Full Stack Development</option>
+                                        <option value="Data Analytics">Data Analytics</option>
+                                        <option value="UI/UX Design">UI/UX Design</option>
+                                        <option value="Cyber Security">Cyber Security</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Additional Information -->
+                            <div class="form-section">
+                                <div class="form-group">
+                                    <label for="additionalInfo">Anything else we should know?</label>
+                                    <textarea class="form-control" id="additionalInfo" rows="3" placeholder="e.g., specific goals, questions..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Terms & Conditions -->
+                            <div class="form-check">
+                                <input class="checkbox-input" type="checkbox" id="terms" required>
+                                <label class="checkbox-label" for="terms">
+                                    I agree to the Terms of Service and Privacy Policy.
+                                </label>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-brand btn-lg btn-submit" id="submitButton">
+                                <span class="button-text">Submit My Enrollment</span>
+                                <span class="spinner"></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Benefits -->
+                <div class="benefits-column">
+                    <div class="benefits-card">
+                        <h3>You're Making a Great Decision.</h3>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h5>Launch Your Career</h5>
+                                <p>Our programs are designed with one goal: to get you hired. Gain practical, job-ready skills.</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h5>Expert-Led Instruction</h5>
+                                <p>Learn from industry veterans who bring real-world experience into the classroom.</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h5>Dedicated Support</h5>
+                                <p>From day one to your first job, our team provides continuous mentorship and career support.</p>
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <h5>What Happens Next?</h5>
+                        <ul class="next-steps">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>You'll receive a confirmation email instantly.</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Our admissions advisor will call you within 24 hours to finalize your onboarding.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h3>Enrollment Submitted!</h3>
+                <p class="modal-lead">Welcome! We've received your details and are excited to have you on board.</p>
+                <p>Our team will be in touch shortly to guide you through the next steps.</p>
+                <button type="button" class="btn btn-brand btn-lg" id="backToHome">Back to Homepage</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 SKILL VANTIX. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

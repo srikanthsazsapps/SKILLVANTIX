@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Transition Navigator | SKILL VANTIX</title>
+    
+    <meta name="description" content="Get a personalized roadmap to transition from any background into a high-demand IT career like Data Analyst, Full Stack Developer, or UI/UX Designer.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="Career.css">
+</head>
+<body>
+    <!-- Inline JavaScript -->
+    <script>
+        /* ========================================
+   CAREER NAVIGATOR PAGE - JAVASCRIPT
+   Interactive Features & Animations
+======================================== */
+
+(function() {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // ========================================
+        // Navigation Toggle
+        // ========================================
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        }
+
+        // ========================================
+        // Navbar Scroll Effect
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========================================
+        // Smooth Scrolling
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // Career Navigator Logic
+        // ========================================
+        const roadmapData = {
+            'data-analyst': {
+                title: 'Data Analyst',
+                steps: [
+                    {
+                        icon: 'fas fa-cogs',
+                        phase: 'Phase 1: Leverage Your Foundation',
+                        description: 'Your existing analytical mindset is your biggest asset. We start by translating that into the language of data.',
+                        skills: ['Problem Decomposition', 'Statistical Thinking', 'Advanced Excel']
+                    },
+                    {
+                        icon: 'fas fa-database',
+                        phase: 'Phase 2: Core Technical Skills',
+                        description: 'Build the technical toolkit every data analyst needs to manipulate and query data effectively.',
+                        skills: ['SQL (PostgreSQL)', 'Python (Pandas, NumPy)', 'Data Warehousing Concepts']
+                    },
+                    {
+                        icon: 'fas fa-chart-bar',
+                        phase: 'Phase 3: Visualization & Storytelling',
+                        description: 'Learn to turn raw data into compelling stories and actionable insights using powerful visualization tools.',
+                        skills: ['Tableau', 'Power BI', 'Data Storytelling Principles']
+                    },
+                    {
+                        icon: 'fas fa-project-diagram',
+                        phase: 'Phase 4: Portfolio & Specialization',
+                        description: 'Apply your skills to real-world projects. A project analyzing business data or market trends would be a perfect fit.',
+                        skills: ['Portfolio Projects', 'Domain-Specific Analysis', 'Interview Prep']
+                    }
+                ],
+                cta: {
+                    link: '/pages/DataAnalytics.html',
+                    text: 'Explore our Data Analytics Course'
+                }
+            },
+            'full-stack': {
+                title: 'Full Stack Developer',
+                steps: [
+                    {
+                        icon: 'fas fa-code',
+                        phase: 'Phase 1: Programming Fundamentals',
+                        description: 'Your logical thinking is a great starting point for coding. We start with the core languages of the web.',
+                        skills: ['HTML5 & CSS3', 'JavaScript (ES6+)', 'Git & GitHub']
+                    },
+                    {
+                        icon: 'fas fa-desktop',
+                        phase: 'Phase 2: Frontend Development',
+                        description: 'Learn to build beautiful, responsive, and interactive user interfaces using modern frameworks.',
+                        skills: ['React.js', 'Responsive Design', 'API Integration']
+                    },
+                    {
+                        icon: 'fas fa-server',
+                        phase: 'Phase 3: Backend Development',
+                        description: 'Build the server-side logic, databases, and APIs that power web applications.',
+                        skills: ['Node.js & Express', 'REST APIs', 'SQL & NoSQL (MongoDB)']
+                    },
+                    {
+                        icon: 'fas fa-rocket',
+                        phase: 'Phase 4: Deployment & Portfolio',
+                        description: 'Deploy your full-stack applications to the cloud and build a robust portfolio to showcase your end-to-end development skills.',
+                        skills: ['Docker', 'Cloud Services (AWS/Heroku)', 'Full-Stack Projects']
+                    }
+                ],
+                cta: {
+                    link: '/pages/FullStack.html',
+                    text: 'Explore our Full Stack Development Course'
+                }
+            },
+            'ui-ux': {
+                title: 'UI/UX Designer',
+                steps: [
+                    {
+                        icon: 'fas fa-brain',
+                        phase: 'Phase 1: Design Thinking & Empathy',
+                        description: 'Learn the fundamentals of user-centered design. Focus on understanding user problems before seeking solutions.',
+                        skills: ['Design Thinking', 'User Personas', 'Empathy Mapping']
+                    },
+                    {
+                        icon: 'fas fa-sitemap',
+                        phase: 'Phase 2: Research & Structure',
+                        description: 'Master the techniques for user research and structuring information logically to create intuitive user flows.',
+                        skills: ['User Interviews', 'Journey Mapping', 'Information Architecture']
+                    },
+                    {
+                        icon: 'fas fa-drafting-compass',
+                        phase: 'Phase 3: Wireframing & Prototyping',
+                        description: 'Bring ideas to life by creating low-fidelity wireframes and high-fidelity, interactive prototypes in Figma.',
+                        skills: ['Figma', 'Wireframing', 'Interactive Prototyping']
+                    },
+                    {
+                        icon: 'fas fa-palette',
+                        phase: 'Phase 4: Visual Design & Portfolio',
+                        description: 'Learn the principles of UI design, including color, typography, and layout, and build a portfolio-ready case study.',
+                        skills: ['UI Principles', 'Design Systems', 'Portfolio Case Study']
+                    }
+                ],
+                cta: {
+                    link: '/pages/UIUX.html',
+                    text: 'Explore our UI/UX Design Course'
+                }
+            }
+        };
+
+        const findPathBtn = document.getElementById('find-path');
+        const resultsSection = document.getElementById('results');
+        const fromDomainSpan = document.getElementById('from-domain');
+        const toCareerSpan = document.getElementById('to-career');
+        const roadmapContainer = document.querySelector('.roadmap-output');
+
+        const renderRoadmap = (roadmap, fromText, toText) => {
+            fromDomainSpan.textContent = fromText;
+            toCareerSpan.textContent = toText;
+
+            let stepsHtml = roadmap.steps.map((step, index) => `
+                <div class="roadmap-step" style="animation-delay: ${index * 0.1}s">
+                    <div class="step-icon">
+                        <i class="${step.icon}"></i>
+                    </div>
+                    <div class="step-content">
+                        <h5>${step.phase}</h5>
+                        <p>${step.description}</p>
+                        <div class="skills-badges">
+                            ${step.skills.map(skill => `<span class="skill-badge">${skill}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            let ctaHtml = `
+                <div class="roadmap-cta">
+                    <h4>Ready to Start Your Journey?</h4>
+                    <p>Our expert-led courses are designed to guide you through this exact blueprint.</p>
+                    <a href="${roadmap.cta.link}" class="btn btn-brand btn-lg">${roadmap.cta.text}</a>
+                </div>
+            `;
+
+            roadmapContainer.innerHTML = stepsHtml + ctaHtml;
+
+            // Trigger animations
+            setTimeout(() => {
+                document.querySelectorAll('.roadmap-step').forEach(step => {
+                    step.classList.add('visible');
+                });
+            }, 100);
+        };
+
+        if (findPathBtn) {
+            findPathBtn.addEventListener('click', () => {
+                const currentDomainSelect = document.getElementById('current-domain');
+                const targetCareerSelect = document.getElementById('target-career');
+                const currentDomainText = currentDomainSelect.options[currentDomainSelect.selectedIndex].text;
+                const targetCareerValue = targetCareerSelect.value;
+                const roadmap = roadmapData[targetCareerValue];
+
+                if (roadmap) {
+                    renderRoadmap(roadmap, currentDomainText, roadmap.title);
+                    resultsSection.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 200);
+                }
+            });
+        }
+
+        // ========================================
+        // Console Message
+        // ========================================
+        console.log('%c🚀 SKILL VANTIX - Career Navigator ', 'background: #0A2540; color: #00D4FF; font-size: 16px; padding: 10px;');
+        console.log('%cFind your path to a tech career!', 'color: #0A2540; font-size: 14px;');
+    });
+
+})();
+    </script>
+
+    <!-- Navigation -->
+  <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
+                <!-- <span>SKILL VANTIX</span> -->
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link" href="../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="container">
+                <div class="hero-content-split">
+                    <div class="hero-text">
+                        <p class="hero-subtitle">CAREER TRANSFORM</p>
+                        <h1 class="hero-title">Unlock Your Future in Tech, No Matter Your Background</h1>
+                        <p class="hero-description">Feeling stuck? Our Career Navigator builds a personalized, step-by-step blueprint to guide your transition into a high-demand IT role. Start planning your new career today.</p>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop" alt="People planning a career path">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigator Tool Section -->
+        <section class="section navigator-section">
+            <div class="container">
+                <div class="navigator-card" id="navigator">
+                    <h3>Build Your Personalized Roadmap</h3>
+                    <div class="navigator-inputs">
+                        <div class="input-group">
+                            <label for="current-domain">Your Current Background</label>
+                            <select id="current-domain" class="form-select">
+                                <optgroup label="Engineering">
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                    <option value="Electronics & Communication">Electronics & Communication</option>
+                                </optgroup>
+                                <optgroup label="Commerce & Business">
+                                    <option value="B.Com">B.Com</option>
+                                    <option value="BBA">BBA</option>
+                                </optgroup>
+                                <optgroup label="Arts & Humanities">
+                                    <option value="BA English">BA English</option>
+                                    <option value="BA Economics">BA Economics</option>
+                                </optgroup>
+                                <optgroup label="Science">
+                                    <option value="BSc Physics">BSc Physics</option>
+                                    <option value="BSc Mathematics">BSc Mathematics</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="arrow-icon">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="input-group">
+                            <label for="target-career">Your Target IT Career</label>
+                            <select id="target-career" class="form-select">
+                                <option value="data-analyst">Data Analyst</option>
+                                <option value="full-stack">Full Stack Developer</option>
+                                <option value="ui-ux">UI/UX Designer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="navigator-button">
+                        <button id="find-path" class="btn btn-brand btn-lg">
+                            Generate My Blueprint
+                            <i class="fas fa-magic"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Results Section -->
+        <section class="section section-light results-section" id="results" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Your Path Forward</p>
+                    <h2 class="section-title">Your Personalized Blueprint</h2>
+                    <p class="results-transition">
+                        From <strong id="from-domain"></strong> to <strong id="to-career"></strong>
+                    </p>
+                </div>
+                <div class="roadmap-output">
+                    <!-- Roadmap content will be dynamically generated here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>SKILL VANTIX</h5>
+                    <p>Transforming careers through innovative training and skill development programs.</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html#programs">Programs</a></li>
+                        <li><a href="index.html#courses">Courses</a></li>
+                        <li><a href="#">Career Transform </a></li>
+                        <li><a href="pages/About.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Andagaloregate, Near Rasipuram, Namakkal</p>
+                    <p><i class="fas fa-phone"></i> +91 93609 94617</p>
+                    <p><i class="fas fa-envelope"></i> info@skillvantix.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SKILL VANTIX. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
