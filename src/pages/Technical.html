@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Stack Development Course | SKILL VANTIX</title>
+    <title>Technical Foundation Program | SKILL VANTIX</title>
     
-    <meta name="description" content="Become a job-ready Full Stack Developer. Master the MERN stack (MongoDB, Express, React, Node.js) with our hands-on, project-based course.">
-    <meta name="keywords" content="full stack development, mern stack, react, node.js, mongodb, web development course">
-    
+    <meta name="description" content="Build a rock-solid technical foundation. Our program covers core programming, systems architecture, and development tools to prepare you for any specialized tech career.">
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
     <!-- Fonts - Poppins -->
@@ -19,13 +17,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="FullStack.css">
+    <link rel="stylesheet" href="../css/Technical.css">
 </head>
 <body>
     <!-- Inline JavaScript for Animations -->
     <script>
         /* ========================================
-   FULL STACK PAGE - JAVASCRIPT
+   TECHNICAL FOUNDATION PAGE - JAVASCRIPT
    Scroll Animations & Interactions
 ======================================== */
 
@@ -119,12 +117,11 @@
             // Observe all animated sections
             observeElements('.section-header');
             observeElements('.feature-grid');
-            observeElements('.tech-grid');
             observeElements('.accordion-container');
-            observeElements('.projects-grid');
+            observeElements('.pathway-grid');
             observeElements('.cta-card');
 
-            console.log('✨ Full Stack page animations initialized');
+            console.log('✨ Technical Foundation page animations initialized');
         }
 
         // Initialize animations
@@ -187,18 +184,6 @@
         }
 
         // ========================================
-        // Newsletter Form
-        // ========================================
-        const newsletterForm = document.getElementById('newsletterForm');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Thank you for subscribing! We\'ll keep you updated on our courses.');
-                newsletterForm.reset();
-            });
-        }
-
-        // ========================================
         // Parallax Hero Effect
         // ========================================
         window.addEventListener('scroll', () => {
@@ -226,13 +211,13 @@
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item"><a class="nav-link" href="../index.html#programs">Programs</a></li>
-                <li class="nav-item"><a class="nav-link active" href="../index.html#courses">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="/pages/About.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
-                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+           <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link" href="../../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="../pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
             </ul>
         </div>
     </nav>
@@ -242,15 +227,15 @@
         <header class="hero-section">
             <div class="container">
                 <div class="hero-content">
-                    <p class="hero-subtitle">Full Stack Web Development Program</p>
-                    <h1 class="hero-title">Build Anything You Can Imagine</h1>
-                    <p class="hero-description">Master the MERN stack—MongoDB, Express, React, and Node.js—to design, build, and deploy complex, production-ready web applications from end to end.</p>
+                    <p class="hero-subtitle">Technical Foundation Program</p>
+                    <h1 class="hero-title">Build the Foundation for a Lifelong Career in Tech</h1>
+                    <p class="hero-description">Before you can build skyscrapers, you need to master the foundation. This program equips you with the universal technical principles that power every specialization in the industry.</p>
                     <div class="hero-facts">
                         <div class="fact-item">
                             <i class="fas fa-clock"></i>
                             <div class="fact-text">
                                 <strong>Duration</strong>
-                                <span>6 Months</span>
+                                <span>8 Weeks</span>
                             </div>
                         </div>
                         <div class="fact-item">
@@ -264,7 +249,7 @@
                             <i class="fas fa-laptop-code"></i>
                             <div class="fact-text">
                                 <strong>Format</strong>
-                                <span>Online, Live</span>
+                                <span>Live Online</span>
                             </div>
                         </div>
                     </div>
@@ -272,88 +257,52 @@
             </div>
         </header>
 
-        <!-- What You Will Build Section -->
+        <!-- Why This Program Section -->
         <section class="section">
             <div class="container">
                 <div class="section-header">
-                    <p class="section-subtitle">Core Capabilities</p>
-                    <h2 class="section-title">What You Will Be Able to Build</h2>
+                    <p class="section-subtitle">Why This Program is Essential</p>
+                    <h2 class="section-title">Your Launchpad into Any Tech Role</h2>
                 </div>
                 <div class="feature-grid">
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i class="fas fa-desktop"></i>
+                            <i class="fas fa-language"></i>
                         </div>
-                        <h4>Dynamic Frontends</h4>
-                        <p>Craft beautiful, responsive, and fast user interfaces using the power of React.js and modern CSS.</p>
+                        <h4>Speak the Language</h4>
+                        <p>Understand the core concepts of programming, networks, and databases that are common across all tech jobs.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i class="fas fa-server"></i>
+                            <i class="fas fa-brain"></i>
                         </div>
-                        <h4>Robust Backends</h4>
-                        <p>Engineer scalable server-side applications, RESTful APIs, and manage server logic with Node.js and Express.</p>
+                        <h4>Think Like an Engineer</h4>
+                        <p>Develop a structured, logical problem-solving mindset that is crucial for tackling complex technical challenges.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i class="fas fa-database"></i>
+                            <i class="fas fa-layer-group"></i>
                         </div>
-                        <h4>Flexible Databases</h4>
-                        <p>Design and manage complex data models with both SQL and NoSQL databases like PostgreSQL and MongoDB.</p>
+                        <h4>Prepare to Specialize</h4>
+                        <p>Build the strong base needed to accelerate your learning in advanced fields like AI, cloud, or full-stack development.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i class="fas fa-rocket"></i>
+                            <i class="fas fa-user-tie"></i>
                         </div>
-                        <h4>Deployed Applications</h4>
-                        <p>Take your projects from local development to a live production environment using Docker and cloud platforms.</p>
+                        <h4>Ace Technical Interviews</h4>
+                        <p>Gain the confidence to answer fundamental interview questions that trip up even experienced candidates.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Technology Stack Section -->
+        
+        <!-- Curriculum Section -->
         <section class="section section-light">
             <div class="container">
                 <div class="section-header">
-                    <p class="section-subtitle">Tools of the Trade</p>
-                    <h2 class="section-title">Technology You'll Master</h2>
-                </div>
-                <div class="tech-grid">
-                    <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" alt="React">
-                        <p>React</p>
-                    </div>
-                    <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg" alt="Node.js">
-                        <p>Node.js</p>
-                    </div>
-                    <div class="tech-item">
-                        <img src="https://cdn.worldvectorlogo.com/logos/express-109.svg" alt="Express">
-                        <p>Express</p>
-                    </div>
-                    <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg" alt="MongoDB">
-                        <p>MongoDB</p>
-                    </div>
-                    <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg" alt="JavaScript">
-                        <p>JavaScript</p>
-                    </div>
-                    <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" alt="Docker">
-                        <p>Docker</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Curriculum Section -->
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <p class="section-subtitle">Course Structure</p>
-                    <h2 class="section-title">Week-by-Week Curriculum</h2>
+                    <p class="section-subtitle">Program Structure</p>
+                    <h2 class="section-title">The Core Pillars of Our Training</h2>
                 </div>
                 <div class="accordion-container">
                     <div class="accordion">
@@ -361,12 +310,12 @@
                             <div class="accordion-header">
                                 <button class="accordion-button">
                                     <span class="accordion-number">01</span>
-                                    <span class="accordion-title">Module 1: Web Foundations & JavaScript</span>
+                                    <span class="accordion-title">Pillar 1: Programming & Logic</span>
                                     <i class="fas fa-chevron-down accordion-icon"></i>
                                 </button>
                             </div>
                             <div class="accordion-content">
-                                <p>Build a solid foundation with modern HTML5, CSS3, Flexbox, Grid, and master the fundamentals of JavaScript (ES6+).</p>
+                                <p>Master the universal principles of coding. We cover variables, control flow, functions, and object-oriented concepts using Python, along with essential data structures and algorithms.</p>
                             </div>
                         </div>
                         
@@ -374,12 +323,12 @@
                             <div class="accordion-header">
                                 <button class="accordion-button">
                                     <span class="accordion-number">02</span>
-                                    <span class="accordion-title">Module 2: Frontend Development with React</span>
+                                    <span class="accordion-title">Pillar 2: Systems & Architecture</span>
                                     <i class="fas fa-chevron-down accordion-icon"></i>
                                 </button>
                             </div>
                             <div class="accordion-content">
-                                <p>Dive deep into React, learning about components, state management, hooks, and routing to build single-page applications.</p>
+                                <p>Understand how everything fits together. Learn the basics of operating systems (Linux), computer networking (TCP/IP), and how databases (SQL) store and retrieve information.</p>
                             </div>
                         </div>
                         
@@ -387,51 +336,12 @@
                             <div class="accordion-header">
                                 <button class="accordion-button">
                                     <span class="accordion-number">03</span>
-                                    <span class="accordion-title">Module 3: Backend with Node.js & Express</span>
+                                    <span class="accordion-title">Pillar 3: Development Lifecycle & Tools</span>
                                     <i class="fas fa-chevron-down accordion-icon"></i>
                                 </button>
                             </div>
                             <div class="accordion-content">
-                                <p>Create powerful server-side applications and build secure, efficient RESTful APIs from scratch using Node.js and Express.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <button class="accordion-button">
-                                    <span class="accordion-number">04</span>
-                                    <span class="accordion-title">Module 4: Databases with MongoDB & SQL</span>
-                                    <i class="fas fa-chevron-down accordion-icon"></i>
-                                </button>
-                            </div>
-                            <div class="accordion-content">
-                                <p>Learn to model and manage data using both NoSQL (MongoDB) and relational databases (PostgreSQL), and integrate them with your backend.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <button class="accordion-button">
-                                    <span class="accordion-number">05</span>
-                                    <span class="accordion-title">Module 5: Deployment & DevOps</span>
-                                    <i class="fas fa-chevron-down accordion-icon"></i>
-                                </button>
-                            </div>
-                            <div class="accordion-content">
-                                <p>Master Git for version control, containerize your applications with Docker, and deploy them to cloud services like AWS or Heroku.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <button class="accordion-button">
-                                    <span class="accordion-number">06</span>
-                                    <span class="accordion-title">Module 6: Full-Stack Capstone Project</span>
-                                    <i class="fas fa-chevron-down accordion-icon"></i>
-                                </button>
-                            </div>
-                            <div class="accordion-content">
-                                <p>Combine all your skills to design, develop, and deploy a complete, portfolio-worthy full-stack application from concept to launch.</p>
+                                <p>Learn how modern software is built. Get hands-on with the command line, manage your code with Git and GitHub, and understand the basics of the software development lifecycle (Agile).</p>
                             </div>
                         </div>
                     </div>
@@ -439,52 +349,57 @@
             </div>
         </section>
 
-        <!-- Portfolio Projects Section -->
-        <section class="section section-light">
+        <!-- Your Next Step Section -->
+        <section class="section">
             <div class="container">
                 <div class="section-header">
-                    <p class="section-subtitle">Build Your Portfolio</p>
-                    <h2 class="section-title">Hands-On Portfolio Projects</h2>
+                    <p class="section-subtitle">Career Pathways</p>
+                    <h2 class="section-title">Your Next Step After This Program</h2>
                 </div>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1585123334904-845d60e97b29?q=80&w=1935&auto=format&fit=crop" alt="E-commerce Platform">
+                <div class="pathway-grid">
+                    <div class="pathway-card">
+                        <div class="pathway-icon">
+                            <i class="fas fa-code"></i>
                         </div>
-                        <div class="project-content">
-                            <h5>E-commerce Platform</h5>
-                            <p>Build a complete online store with product listings, a shopping cart, user authentication, and a payment gateway integration.</p>
-                        </div>
+                        <h4>Full Stack Development</h4>
+                        <p>With a solid foundation, you'll be perfectly prepared to master the MERN stack and build complete web applications.</p>
+                        <a href="../FullStack/index.html" class="btn btn-outline">View Program</a>
                     </div>
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1579820010410-c10418a41920?q=80&w=2070&auto=format&fit=crop" alt="Project Management Tool">
+                    <div class="pathway-card">
+                        <div class="pathway-icon">
+                            <i class="fas fa-chart-bar"></i>
                         </div>
-                        <div class="project-content">
-                            <h5>Project Management Tool</h5>
-                            <p>Create a Trello-like application with boards, lists, and draggable cards to manage tasks and collaborate in real-time.</p>
-                        </div>
+                        <h4>Data Analytics</h4>
+                        <p>Your new programming and database skills will give you a massive head start in learning to analyze data and build models.</p>
+                        <a href="../DataAnalytics/index.html" class="btn btn-outline">View Program</a>
                     </div>
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop" alt="Social Media App">
+                    <div class="pathway-card">
+                        <div class="pathway-icon">
+                            <i class="fas fa-cloud"></i>
                         </div>
-                        <div class="project-content">
-                            <h5>Social Media App</h5>
-                            <p>Develop a social platform where users can create profiles, make posts, comment on others' posts, and follow friends.</p>
+                        <h4>Cloud & DevOps</h4>
+                        <p>Understanding systems and networks is the first step to specializing in cloud infrastructure, automation, and deployment.</p>
+                        <a href="../index.html#courses" class="btn btn-outline btn-disabled">Coming Soon</a>
+                    </div>
+                    <div class="pathway-card">
+                        <div class="pathway-icon">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
+                        <h4>Cyber Security</h4>
+                        <p>Protect digital assets and combat cyber threats. Master security principles and industry-standard protection tools.</p>
+                        <a href="../CyberSecurity/index.html" class="btn btn-outline">View Program</a>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <!-- CTA Section -->
         <section class="section cta-section">
             <div class="container">
                 <div class="cta-card">
                     <div class="cta-content">
-                        <h2>Ready to Build the Web's Future?</h2>
-                        <p>Enroll now to gain the most sought-after skill set in the tech industry and start building powerful applications.</p>
+                        <h2>Stop Feeling Overwhelmed. Start Building.</h2>
+                        <p>Enroll in the Technical Foundation Program and gain the confidence to succeed in any tech career you choose.</p>
                     </div>
                     <div class="cta-button">
                         <a href="/pages/Enroll.html" class="btn btn-light btn-lg">Enroll Now</a>
@@ -500,7 +415,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h5>SKILL VANTIX</h5>
-                    <p>Transforming careers through innovative training and skill development programs.</p>
+                    <p>Empowering professionals with cutting-edge training and comprehensive career support to succeed in the technology industry.</p>
                     <div class="social-links">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -519,12 +434,13 @@
                 </div>
                 <div class="footer-section">
                     <h5>Contact</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Andagaloregate, Near Rasipuram, Namakkal</p>
                     <p><i class="fas fa-phone"></i> +91 93609 94617</p>
                     <p><i class="fas fa-envelope"></i> successmeetsacademy@gmail.com</p>
                 </div>
                 <div class="footer-section">
                     <h5>Newsletter</h5>
-                    <p>Stay updated with our latest courses.</p>
+                    <p>Subscribe to receive updates on new courses and career opportunities.</p>
                     <form id="newsletterForm" class="newsletter-form">
                         <input type="email" placeholder="Your email" required>
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>

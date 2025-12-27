@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Security Course | SKILL VANTIX</title>
+    <title>Data Analytics Course | SKILL VANTIX</title>
     
-    <meta name="description" content="Become a Cyber Security Professional. Master network security, ethical hacking, penetration testing, and security operations in our comprehensive course.">
-    <meta name="keywords" content="cyber security, ethical hacking, penetration testing, network security, security operations, cryptography">
+    <meta name="description" content="Become a job-ready Data Analyst. Master Python, SQL, Tableau, and Machine Learning with our hands-on, project-based Data Analytics course.">
+    <meta name="keywords" content="data analytics, python, sql, tableau, machine learning, data science course">
     
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -19,13 +19,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="Cyber.css">
+    <link rel="stylesheet" href="../css/DataAnalytics.css">
 </head>
 <body>
     <!-- Inline JavaScript for Animations -->
     <script>
         /* ========================================
-   CYBER SECURITY PAGE - JAVASCRIPT
+   DATA ANALYTICS COURSE PAGE - JAVASCRIPT
    Interactive Features & Animations
 ======================================== */
 
@@ -159,6 +159,8 @@
         if (newsletterForm) {
             newsletterForm.addEventListener('submit', (e) => {
                 e.preventDefault();
+                const email = newsletterForm.querySelector('input[type="email"]').value;
+                
                 alert('Thank you for subscribing! We\'ll keep you updated.');
                 newsletterForm.reset();
             });
@@ -228,7 +230,7 @@
         }
 
         // ========================================
-        // Keyboard Accessibility for Accordion
+        // Accessibility: Keyboard Navigation for Accordion
         // ========================================
         accordionHeaders.forEach((header, index) => {
             header.setAttribute('tabindex', '0');
@@ -241,6 +243,7 @@
                     header.click();
                 }
                 
+                // Arrow key navigation
                 if (e.key === 'ArrowDown') {
                     e.preventDefault();
                     const nextHeader = accordionHeaders[index + 1];
@@ -254,6 +257,7 @@
                 }
             });
             
+            // Update aria-expanded on click
             header.addEventListener('click', () => {
                 const isExpanded = header.parentElement.classList.contains('active');
                 header.setAttribute('aria-expanded', isExpanded);
@@ -263,8 +267,8 @@
         // ========================================
         // Console Message
         // ========================================
-        console.log('%c🔒 SKILL VANTIX - Cyber Security Course ', 'background: #0A2540; color: #00D4FF; font-size: 16px; padding: 10px;');
-        console.log('%cSecure the digital world, one vulnerability at a time!', 'color: #0A2540; font-size: 14px;');
+        console.log('%c🎓 SKILL VANTIX - Data Analytics Course ', 'background: #0A2540; color: #00D4FF; font-size: 16px; padding: 10px;');
+        console.log('%cWelcome to the future of data education!', 'color: #0A2540; font-size: 14px;');
 
     });
 
@@ -272,7 +276,7 @@
     </script>
 
     <!-- Navigation -->
- <nav class="navbar">
+    <nav class="navbar">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
                 <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
@@ -283,13 +287,13 @@
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item"><a class="nav-link active" href="../index.html#programs">Programs</a></li>
-                <li class="nav-item"><a class="nav-link" href="../index.html#courses">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="/pages/About.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
-                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+           <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a class="nav-link" href="../../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link " href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="../pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
             </ul>
         </div>
     </nav>
@@ -300,9 +304,9 @@
             <div class="hero-background"></div>
             <div class="container">
                 <div class="hero-content">
-                    <p class="hero-subtitle">Cyber Security Professional Program</p>
-                    <h1 class="hero-title">Protect Digital Assets & Combat Cyber Threats</h1>
-                    <p class="hero-description">Master security principles, ethical hacking, and industry-standard protection tools. Become the guardian of the digital realm and defend against evolving cyber threats.</p>
+                    <p class="hero-subtitle">Data Analytics Professional Program</p>
+                    <h1 class="hero-title">Transform Data Overload into Actionable Insight</h1>
+                    <p class="hero-description">Master Python, SQL, and Tableau to analyze complex data, build predictive models, and drive business growth. Become the data expert companies are searching for.</p>
                     <div class="hero-facts">
                         <div class="fact-item">
                             <i class="fas fa-clock"></i>
@@ -319,10 +323,10 @@
                             </div>
                         </div>
                         <div class="fact-item">
-                            <i class="fas fa-shield-alt"></i>
+                            <i class="fas fa-laptop-code"></i>
                             <div class="fact-text">
-                                <strong>Career Track</strong>
-                                <span>Hot Career</span>
+                                <strong>Format</strong>
+                                <span>Online, Live</span>
                             </div>
                         </div>
                     </div>
@@ -340,38 +344,31 @@
                 <div class="mastery-grid">
                     <div class="mastery-card">
                         <div class="mastery-icon">
-                            <i class="fas fa-network-wired"></i>
+                            <i class="fas fa-database"></i>
                         </div>
-                        <h4>Network Security & Protocols</h4>
-                        <p>Master network architecture, firewalls, VPNs, and secure network protocols to protect organizational infrastructure.</p>
+                        <h4>Master Data Wrangling</h4>
+                        <p>Use Python and SQL to clean, transform, and query complex datasets with confidence.</p>
                     </div>
                     <div class="mastery-card">
                         <div class="mastery-icon">
-                            <i class="fas fa-user-secret"></i>
+                            <i class="fas fa-chart-pie"></i>
                         </div>
-                        <h4>Ethical Hacking & Penetration Testing</h4>
-                        <p>Learn offensive security techniques, vulnerability assessment, and penetration testing methodologies used by professionals.</p>
+                        <h4>Tell Compelling Stories</h4>
+                        <p>Create stunning, interactive dashboards in Tableau and Power BI to present insights effectively.</p>
                     </div>
                     <div class="mastery-card">
                         <div class="mastery-icon">
-                            <i class="fas fa-desktop"></i>
+                            <i class="fas fa-calculator"></i>
                         </div>
-                        <h4>Security Operations & Incident Response</h4>
-                        <p>Develop skills in security monitoring, threat detection, incident handling, and rapid response to security breaches.</p>
+                        <h4>Uncover Hidden Patterns</h4>
+                        <p>Apply statistical analysis and hypothesis testing to validate findings and inform strategy.</p>
                     </div>
                     <div class="mastery-card">
                         <div class="mastery-icon">
-                            <i class="fas fa-lock"></i>
+                            <i class="fas fa-brain"></i>
                         </div>
-                        <h4>Cryptography & Data Protection</h4>
-                        <p>Understand encryption algorithms, cryptographic protocols, and data protection strategies to secure sensitive information.</p>
-                    </div>
-                    <div class="mastery-card">
-                        <div class="mastery-icon">
-                            <i class="fas fa-clipboard-check"></i>
-                        </div>
-                        <h4>Security Compliance & Risk Management</h4>
-                        <p>Learn security frameworks, compliance standards (ISO, NIST), and risk assessment methodologies for enterprise security.</p>
+                        <h4>Predict the Future</h4>
+                        <p>Build and evaluate machine learning models for classification and regression tasks.</p>
                     </div>
                 </div>
             </div>
@@ -382,32 +379,32 @@
             <div class="container">
                 <div class="section-header">
                     <p class="section-subtitle">Tools of the Trade</p>
-                    <h2 class="section-title">Industry-Standard Security Tools</h2>
+                    <h2 class="section-title">Technology You'll Use</h2>
                 </div>
                 <div class="tech-grid">
                     <div class="tech-item">
-                        <img src="https://www.kali.org/images/kali-logo.svg" alt="Kali Linux">
-                        <p>Kali Linux</p>
-                    </div>
-                    <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/wireshark/wireshark-icon.svg" alt="Wireshark">
-                        <p>Wireshark</p>
-                    </div>
-                    <div class="tech-item">
-                        <img src="https://nmap.org/images/nmap-logo-256x256.png" alt="Nmap">
-                        <p>Nmap</p>
-                    </div>
-                    <div class="tech-item">
-                        <img src="https://www.metasploit.com/assets/metasploit-r7-logo.svg" alt="Metasploit">
-                        <p>Metasploit</p>
-                    </div>
-                    <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="Bash">
-                        <p>Bash</p>
-                    </div>
-                    <div class="tech-item">
                         <img src="https://www.vectorlogo.zone/logos/python/python-icon.svg" alt="Python">
                         <p>Python</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg" alt="SQL">
+                        <p>SQL</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau">
+                        <p>Tableau</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg" alt="Power BI">
+                        <p>Power BI</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://www.vectorlogo.zone/logos/scikit-learn/scikit-learn-icon.svg" alt="Scikit-learn">
+                        <p>Scikit-learn</p>
+                    </div>
+                    <div class="tech-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Pandas_mark.svg" alt="Pandas">
+                        <p>Pandas</p>
                     </div>
                 </div>
             </div>
@@ -418,68 +415,68 @@
             <div class="container">
                 <div class="section-header">
                     <p class="section-subtitle">Course Structure</p>
-                    <h2 class="section-title">Comprehensive Security Training Path</h2>
+                    <h2 class="section-title">Week-by-Week Curriculum</h2>
                 </div>
                 <div class="curriculum-wrapper">
                     <div class="accordion">
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">01</span>
-                                <span class="accordion-title">Security Fundamentals & Network Basics</span>
+                                <span class="accordion-title">Data Analytics Foundations & Excel</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Build a strong foundation in information security principles, CIA triad, network protocols, and basic security concepts essential for advanced learning.</p>
+                                <p>Master advanced Excel functions, pivot tables, and statistical concepts that form the bedrock of data analysis.</p>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">02</span>
-                                <span class="accordion-title">Network Security & Infrastructure Protection</span>
+                                <span class="accordion-title">SQL for Data Extraction</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Master firewalls, IDS/IPS systems, VPNs, network segmentation, and secure network architecture design to protect organizational infrastructure.</p>
+                                <p>Learn to write complex SQL queries to extract, join, and aggregate data from relational databases like a pro.</p>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">03</span>
-                                <span class="accordion-title">Ethical Hacking & Penetration Testing</span>
+                                <span class="accordion-title">Python for Data Manipulation</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Learn reconnaissance, scanning, enumeration, exploitation, and post-exploitation techniques. Conduct full penetration tests using industry-standard methodologies.</p>
+                                <p>Dive into Python with Pandas and NumPy to perform powerful data cleaning, manipulation, and exploratory data analysis (EDA).</p>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">04</span>
-                                <span class="accordion-title">Web Application & System Security</span>
+                                <span class="accordion-title">Data Visualization with Tableau & Power BI</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Master OWASP Top 10 vulnerabilities, web application security testing, system hardening, and secure coding practices to protect applications and systems.</p>
+                                <p>Build interactive and insightful dashboards that effectively communicate your findings to any audience.</p>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">05</span>
-                                <span class="accordion-title">Security Operations & Incident Response</span>
+                                <span class="accordion-title">Introduction to Machine Learning</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Develop skills in SIEM tools, log analysis, threat hunting, incident response procedures, and security operations center (SOC) operations.</p>
+                                <p>Understand the fundamentals of machine learning and build predictive models for classification and regression using Scikit-learn.</p>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">06</span>
-                                <span class="accordion-title">Cryptography, Compliance & Career Prep</span>
+                                <span class="accordion-title">Capstone Project & Career Prep</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Master encryption techniques, security frameworks (ISO 27001, NIST), compliance requirements, and prepare for industry certifications like CEH and Security+.</p>
+                                <p>Apply all your skills to a real-world, end-to-end data analytics project, and prepare for interviews with resume workshops and mock sessions.</p>
                             </div>
                         </div>
                     </div>
@@ -492,34 +489,34 @@
             <div class="container">
                 <div class="section-header">
                     <p class="section-subtitle">Build Your Portfolio</p>
-                    <h2 class="section-title">Hands-On Security Projects</h2>
+                    <h2 class="section-title">Hands-On Portfolio Projects</h2>
                 </div>
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop" alt="Penetration Testing Lab">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop" alt="E-commerce Sales Dashboard">
                         </div>
                         <div class="project-content">
-                            <h5>Full Penetration Test Report</h5>
-                            <p>Conduct a comprehensive penetration test on a simulated corporate network, identify vulnerabilities, and deliver a professional security assessment report.</p>
+                            <h5>E-commerce Sales Dashboard</h5>
+                            <p>Analyze a sales dataset to identify top-performing products and regions, then build an interactive Tableau dashboard for stakeholders.</p>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Security Operations Center">
+                            <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?q=80&w=2070&auto=format&fit=crop" alt="Customer Churn Prediction">
                         </div>
                         <div class="project-content">
-                            <h5>Incident Response Simulation</h5>
-                            <p>Build a SOC environment, detect a simulated security breach, conduct forensic analysis, and execute a complete incident response playbook.</p>
+                            <h5>Customer Churn Prediction</h5>
+                            <p>Use Python and machine learning to build a model that predicts which customers are likely to churn, helping a business take proactive measures.</p>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2070&auto=format&fit=crop" alt="Secure Infrastructure">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop" alt="Marketing Campaign Analysis">
                         </div>
                         <div class="project-content">
-                            <h5>Secure Network Architecture</h5>
-                            <p>Design and implement a secure enterprise network with proper segmentation, firewall rules, VPN configuration, and comprehensive security policies.</p>
+                            <h5>Marketing Campaign Analysis</h5>
+                            <p>Perform A/B testing analysis using SQL and statistical methods to determine the effectiveness of a digital marketing campaign.</p>
                         </div>
                     </div>
                 </div>
@@ -531,15 +528,14 @@
             <div class="container">
                 <div class="section-header">
                     <p class="section-subtitle">Your Future Career</p>
-                    <h2 class="section-title">High-Demand Career Opportunities</h2>
+                    <h2 class="section-title">Career Outcomes</h2>
                 </div>
                 <div class="careers-container">
-                    <span class="career-badge">Security Analyst</span>
-                    <span class="career-badge">Penetration Tester</span>
-                    <span class="career-badge">Security Engineer</span>
-                    <span class="career-badge">SOC Analyst</span>
-                    <span class="career-badge">Incident Responder</span>
-                    <span class="career-badge">Security Consultant</span>
+                    <span class="career-badge">Data Analyst</span>
+                    <span class="career-badge">Business Intelligence Analyst</span>
+                    <span class="career-badge">Marketing Analyst</span>
+                    <span class="career-badge">Financial Analyst</span>
+                    <span class="career-badge">Junior Data Scientist</span>
                 </div>
             </div>
         </section>
@@ -549,8 +545,8 @@
             <div class="container">
                 <div class="cta-card">
                     <div class="cta-content">
-                        <h2>Become a Cyber Security Guardian</h2>
-                        <p>Join the frontline of digital defense. Enroll now and start your journey to becoming a certified cyber security professional.</p>
+                        <h2>Become a Data-Driven Decision Maker</h2>
+                        <p>Enroll now and gain the most in-demand skill of the 21st century. Your new career in data starts here.</p>
                     </div>
                     <div class="cta-button">
                         <a href="Enroll/index.html" class="btn btn-light btn-lg">Enroll Now</a>

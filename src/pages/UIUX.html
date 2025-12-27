@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Analytics Course | SKILL VANTIX</title>
+    <title>UI/UX Design Program | SKILL VANTIX</title>
     
-    <meta name="description" content="Become a job-ready Data Analyst. Master Python, SQL, Tableau, and Machine Learning with our hands-on, project-based Data Analytics course.">
-    <meta name="keywords" content="data analytics, python, sql, tableau, machine learning, data science course">
+    <meta name="description" content="Become a job-ready UI/UX Designer. Master user research, wireframing, prototyping, and visual design with Figma and Adobe XD in our hands-on course.">
+    <meta name="keywords" content="ui/ux design, figma, adobe xd, user research, wireframing, prototyping, design course">
     
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -19,13 +19,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="DataAnalytics.css">
+    <link rel="stylesheet" href="../css/UIUX.css">
 </head>
 <body>
     <!-- Inline JavaScript for Animations -->
     <script>
         /* ========================================
-   DATA ANALYTICS COURSE PAGE - JAVASCRIPT
+   UI/UX DESIGN PAGE - JAVASCRIPT
    Interactive Features & Animations
 ======================================== */
 
@@ -135,7 +135,7 @@
                     entry.target.classList.add('animate');
                     
                     // Trigger child animations
-                    const children = entry.target.querySelectorAll('.mastery-card, .tech-item, .project-card, .accordion-item, .career-badge');
+                    const children = entry.target.querySelectorAll('.feature-card, .tech-item, .project-card, .accordion-item');
                     children.forEach((child, index) => {
                         setTimeout(() => {
                             child.style.opacity = '1';
@@ -159,54 +159,27 @@
         if (newsletterForm) {
             newsletterForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const email = newsletterForm.querySelector('input[type="email"]').value;
-                
                 alert('Thank you for subscribing! We\'ll keep you updated.');
                 newsletterForm.reset();
             });
         }
 
-        // ========================================
-        // Parallax Effect for Hero Background
-        // ========================================
-        const heroBackground = document.querySelector('.hero-background');
-        if (heroBackground) {
+     
+        const heroSection = document.querySelector('.hero-section');
+        if (heroSection) {
             window.addEventListener('scroll', () => {
                 const scrollPosition = window.pageYOffset;
-                heroBackground.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+                if (scrollPosition < heroSection.offsetHeight) {
+                    heroSection.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+                }
             });
         }
 
         // ========================================
-        // Button Ripple Effect
-        // ========================================
-        const buttons = document.querySelectorAll('.btn');
-        buttons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple');
-                this.appendChild(ripple);
-
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-
-        // ========================================
-        // Card Tilt Effect (Desktop Only)
+        // Card Hover Effects (Desktop Only)
         // ========================================
         if (window.innerWidth > 768) {
-            const cards = document.querySelectorAll('.mastery-card, .project-card');
+            const cards = document.querySelectorAll('.feature-card, .project-card');
             
             cards.forEach(card => {
                 card.addEventListener('mousemove', (e) => {
@@ -217,10 +190,10 @@
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
                     
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
+                    const rotateX = (y - centerY) / 15;
+                    const rotateY = (centerX - x) / 15;
                     
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
                 });
                 
                 card.addEventListener('mouseleave', () => {
@@ -230,7 +203,15 @@
         }
 
         // ========================================
-        // Accessibility: Keyboard Navigation for Accordion
+        // Floating Animation for Hero Icons
+        // ========================================
+        const factItems = document.querySelectorAll('.fact-item');
+        factItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // ========================================
+        // Keyboard Accessibility for Accordion
         // ========================================
         accordionHeaders.forEach((header, index) => {
             header.setAttribute('tabindex', '0');
@@ -243,7 +224,6 @@
                     header.click();
                 }
                 
-                // Arrow key navigation
                 if (e.key === 'ArrowDown') {
                     e.preventDefault();
                     const nextHeader = accordionHeaders[index + 1];
@@ -257,7 +237,6 @@
                 }
             });
             
-            // Update aria-expanded on click
             header.addEventListener('click', () => {
                 const isExpanded = header.parentElement.classList.contains('active');
                 header.setAttribute('aria-expanded', isExpanded);
@@ -265,10 +244,33 @@
         });
 
         // ========================================
+        // Dynamic Grid Animation
+        // ========================================
+        const featureGrid = document.querySelector('.feature-grid');
+        if (featureGrid) {
+            const gridObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const cards = entry.target.querySelectorAll('.feature-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0) scale(1)';
+                            }, index * 150);
+                        });
+                        gridObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            gridObserver.observe(featureGrid);
+        }
+
+        // ========================================
         // Console Message
         // ========================================
-        console.log('%c🎓 SKILL VANTIX - Data Analytics Course ', 'background: #0A2540; color: #00D4FF; font-size: 16px; padding: 10px;');
-        console.log('%cWelcome to the future of data education!', 'color: #0A2540; font-size: 14px;');
+        console.log('%c🎨 SKILL VANTIX - UI/UX Design Course ', 'background: #0A2540; color: #00D4FF; font-size: 16px; padding: 10px;');
+        console.log('%cDesign the future, one pixel at a time!', 'color: #0A2540; font-size: 14px;');
 
     });
 
@@ -276,7 +278,7 @@
     </script>
 
     <!-- Navigation -->
-    <nav class="navbar">
+  <nav class="navbar">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
                 <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
@@ -288,12 +290,12 @@
                 <span></span>
             </button>
             <ul class="nav-menu" id="navMenu">
-                <li class="nav-item"><a class="nav-link" href="../index.html#programs">Programs</a></li>
-                <li class="nav-item"><a class="nav-link" href="../index.html#courses">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="/pages/Career.html">Career Services</a></li>
-                <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
-                <li class="nav-item"><a href="/pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../index.html#programs">Programs</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../../index.html#courses">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/Career.html">Career Services</a></li>
+                <li class="nav-item"><a class="nav-link " href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../index.html#contact">Contact</a></li>
+                <li class="nav-item"><a href="../pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
             </ul>
         </div>
     </nav>
@@ -301,18 +303,17 @@
     <main>
         <!-- Hero Section -->
         <header class="hero-section">
-            <div class="hero-background"></div>
             <div class="container">
                 <div class="hero-content">
-                    <p class="hero-subtitle">Data Analytics Professional Program</p>
-                    <h1 class="hero-title">Transform Data Overload into Actionable Insight</h1>
-                    <p class="hero-description">Master Python, SQL, and Tableau to analyze complex data, build predictive models, and drive business growth. Become the data expert companies are searching for.</p>
+                    <p class="hero-subtitle">UI/UX Design Program</p>
+                    <h1 class="hero-title">Design Products People Love to Use</h1>
+                    <p class="hero-description">Go beyond pixels and learn the art and science of creating intuitive, beautiful, and user-centered digital experiences that solve real-world problems.</p>
                     <div class="hero-facts">
                         <div class="fact-item">
                             <i class="fas fa-clock"></i>
                             <div class="fact-text">
                                 <strong>Duration</strong>
-                                <span>6 Months</span>
+                                <span>4 Months</span>
                             </div>
                         </div>
                         <div class="fact-item">
@@ -323,10 +324,10 @@
                             </div>
                         </div>
                         <div class="fact-item">
-                            <i class="fas fa-laptop-code"></i>
+                            <i class="fas fa-drafting-compass"></i>
                             <div class="fact-text">
-                                <strong>Format</strong>
-                                <span>Online, Live</span>
+                                <strong>Tools</strong>
+                                <span>Figma, Adobe XD</span>
                             </div>
                         </div>
                     </div>
@@ -341,70 +342,70 @@
                     <p class="section-subtitle">Core Competencies</p>
                     <h2 class="section-title">What You Will Master</h2>
                 </div>
-                <div class="mastery-grid">
-                    <div class="mastery-card">
-                        <div class="mastery-icon">
-                            <i class="fas fa-database"></i>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
                         </div>
-                        <h4>Master Data Wrangling</h4>
-                        <p>Use Python and SQL to clean, transform, and query complex datasets with confidence.</p>
+                        <h4>Understand Your Users</h4>
+                        <p>Master user research, interviews, and personas to build deep empathy and uncover true user needs.</p>
                     </div>
-                    <div class="mastery-card">
-                        <div class="mastery-icon">
-                            <i class="fas fa-chart-pie"></i>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
                         </div>
-                        <h4>Tell Compelling Stories</h4>
-                        <p>Create stunning, interactive dashboards in Tableau and Power BI to present insights effectively.</p>
+                        <h4>Craft Beautiful Interfaces</h4>
+                        <p>Learn visual design principles, color theory, typography, and create pixel-perfect UIs with design systems.</p>
                     </div>
-                    <div class="mastery-card">
-                        <div class="mastery-icon">
-                            <i class="fas fa-calculator"></i>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-object-group"></i>
                         </div>
-                        <h4>Uncover Hidden Patterns</h4>
-                        <p>Apply statistical analysis and hypothesis testing to validate findings and inform strategy.</p>
+                        <h4>Build Seamless Interactions</h4>
+                        <p>Go from wireframes to high-fidelity, interactive prototypes that feel like real products.</p>
                     </div>
-                    <div class="mastery-card">
-                        <div class="mastery-icon">
-                            <i class="fas fa-brain"></i>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-vial"></i>
                         </div>
-                        <h4>Predict the Future</h4>
-                        <p>Build and evaluate machine learning models for classification and regression tasks.</p>
+                        <h4>Validate Your Designs</h4>
+                        <p>Conduct usability testing, analyze feedback, and iterate on your designs based on real user data.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Technology Stack Section -->
+        <!-- Design Tools Section -->
         <section class="section section-light">
             <div class="container">
                 <div class="section-header">
                     <p class="section-subtitle">Tools of the Trade</p>
-                    <h2 class="section-title">Technology You'll Use</h2>
+                    <h2 class="section-title">Master Industry-Standard Design Tools</h2>
                 </div>
                 <div class="tech-grid">
                     <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/python/python-icon.svg" alt="Python">
-                        <p>Python</p>
+                        <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="Figma">
+                        <p>Figma</p>
                     </div>
                     <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg" alt="SQL">
-                        <p>SQL</p>
+                        <img src="https://cdn.worldvectorlogo.com/logos/adobe-xd-2.svg" alt="Adobe XD">
+                        <p>Adobe XD</p>
                     </div>
                     <div class="tech-item">
-                        <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau">
-                        <p>Tableau</p>
+                        <img src="https://www.vectorlogo.zone/logos/sketchapp/sketchapp-icon.svg" alt="Sketch">
+                        <p>Sketch</p>
                     </div>
                     <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg" alt="Power BI">
-                        <p>Power BI</p>
+                        <img src="https://www.vectorlogo.zone/logos/invisionapp/invisionapp-icon.svg" alt="InVision">
+                        <p>InVision</p>
                     </div>
                     <div class="tech-item">
-                        <img src="https://www.vectorlogo.zone/logos/scikit-learn/scikit-learn-icon.svg" alt="Scikit-learn">
-                        <p>Scikit-learn</p>
+                        <img src="https://www.vectorlogo.zone/logos/miro/miro-icon.svg" alt="Miro">
+                        <p>Miro</p>
                     </div>
                     <div class="tech-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Pandas_mark.svg" alt="Pandas">
-                        <p>Pandas</p>
+                        <img src="https://www.vectorlogo.zone/logos/zeplinio/zeplinio-icon.svg" alt="Zeplin">
+                        <p>Zeplin</p>
                     </div>
                 </div>
             </div>
@@ -415,68 +416,68 @@
             <div class="container">
                 <div class="section-header">
                     <p class="section-subtitle">Course Structure</p>
-                    <h2 class="section-title">Week-by-Week Curriculum</h2>
+                    <h2 class="section-title">Your Journey Through the Design Process</h2>
                 </div>
                 <div class="curriculum-wrapper">
                     <div class="accordion">
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">01</span>
-                                <span class="accordion-title">Data Analytics Foundations & Excel</span>
+                                <span class="accordion-title">Foundations of UX & Design Thinking</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Master advanced Excel functions, pivot tables, and statistical concepts that form the bedrock of data analysis.</p>
+                                <p>Understand the core principles of user-centered design, learn the Design Thinking framework, and define user problems.</p>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">02</span>
-                                <span class="accordion-title">SQL for Data Extraction</span>
+                                <span class="accordion-title">User Research & Strategy</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Learn to write complex SQL queries to extract, join, and aggregate data from relational databases like a pro.</p>
+                                <p>Conduct user interviews, create personas and journey maps, and build a solid information architecture.</p>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">03</span>
-                                <span class="accordion-title">Python for Data Manipulation</span>
+                                <span class="accordion-title">Wireframing & Prototyping</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Dive into Python with Pandas and NumPy to perform powerful data cleaning, manipulation, and exploratory data analysis (EDA).</p>
+                                <p>Translate your research into low-fidelity wireframes and build interactive, clickable prototypes to test user flows.</p>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">04</span>
-                                <span class="accordion-title">Data Visualization with Tableau & Power BI</span>
+                                <span class="accordion-title">Visual Design & UI Fundamentals</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Build interactive and insightful dashboards that effectively communicate your findings to any audience.</p>
+                                <p>Master color theory, typography, and layout principles. Learn to create design systems and apply branding to your interfaces.</p>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">05</span>
-                                <span class="accordion-title">Introduction to Machine Learning</span>
+                                <span class="accordion-title">Usability Testing & Handoff</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Understand the fundamentals of machine learning and build predictive models for classification and regression using Scikit-learn.</p>
+                                <p>Plan and conduct usability tests, analyze feedback for iteration, and prepare your final designs for developer handoff.</p>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <button class="accordion-header">
                                 <span class="accordion-number">06</span>
-                                <span class="accordion-title">Capstone Project & Career Prep</span>
+                                <span class="accordion-title">Capstone Project & Portfolio Building</span>
                                 <i class="fas fa-chevron-down accordion-icon"></i>
                             </button>
                             <div class="accordion-content">
-                                <p>Apply all your skills to a real-world, end-to-end data analytics project, and prepare for interviews with resume workshops and mock sessions.</p>
+                                <p>Apply the entire design process to a real-world project, culminating in a portfolio-ready case study to showcase your skills.</p>
                             </div>
                         </div>
                     </div>
@@ -489,53 +490,36 @@
             <div class="container">
                 <div class="section-header">
                     <p class="section-subtitle">Build Your Portfolio</p>
-                    <h2 class="section-title">Hands-On Portfolio Projects</h2>
+                    <h2 class="section-title">Hands-On Design Projects</h2>
                 </div>
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop" alt="E-commerce Sales Dashboard">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Analytics Dashboard">
                         </div>
                         <div class="project-content">
-                            <h5>E-commerce Sales Dashboard</h5>
-                            <p>Analyze a sales dataset to identify top-performing products and regions, then build an interactive Tableau dashboard for stakeholders.</p>
+                            <h5>SaaS Analytics Dashboard</h5>
+                            <p>Design a complex, data-rich dashboard for a business intelligence tool, focusing on clear information hierarchy and data visualization.</p>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?q=80&w=2070&auto=format&fit=crop" alt="Customer Churn Prediction">
+                            <img src="https://images.unsplash.com/photo-1581006852262-5b98a8583b28?q=80&w=1964&auto=format&fit=crop" alt="Mobile App">
                         </div>
                         <div class="project-content">
-                            <h5>Customer Churn Prediction</h5>
-                            <p>Use Python and machine learning to build a model that predicts which customers are likely to churn, helping a business take proactive measures.</p>
+                            <h5>Mobile Wellness App</h5>
+                            <p>Research, design, and prototype a mobile app from scratch, focusing on user onboarding, engagement, and accessibility.</p>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop" alt="Marketing Campaign Analysis">
+                            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" alt="E-commerce Website">
                         </div>
                         <div class="project-content">
-                            <h5>Marketing Campaign Analysis</h5>
-                            <p>Perform A/B testing analysis using SQL and statistical methods to determine the effectiveness of a digital marketing campaign.</p>
+                            <h5>E-commerce Website Redesign</h5>
+                            <p>Conduct a heuristic evaluation of an existing e-commerce site and redesign the user flow and interface for a better shopping experience.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Career Outcomes -->
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <p class="section-subtitle">Your Future Career</p>
-                    <h2 class="section-title">Career Outcomes</h2>
-                </div>
-                <div class="careers-container">
-                    <span class="career-badge">Data Analyst</span>
-                    <span class="career-badge">Business Intelligence Analyst</span>
-                    <span class="career-badge">Marketing Analyst</span>
-                    <span class="career-badge">Financial Analyst</span>
-                    <span class="career-badge">Junior Data Scientist</span>
                 </div>
             </div>
         </section>
@@ -545,8 +529,8 @@
             <div class="container">
                 <div class="cta-card">
                     <div class="cta-content">
-                        <h2>Become a Data-Driven Decision Maker</h2>
-                        <p>Enroll now and gain the most in-demand skill of the 21st century. Your new career in data starts here.</p>
+                        <h2>Ready to Start Designing the Future?</h2>
+                        <p>Enroll now to turn your passion for creativity and problem-solving into a highly rewarding career in design.</p>
                     </div>
                     <div class="cta-button">
                         <a href="Enroll/index.html" class="btn btn-light btn-lg">Enroll Now</a>
@@ -562,7 +546,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h5>SKILL VANTIX</h5>
-                    <p>Empowering professionals with cutting-edge training and comprehensive career support to succeed in the technology industry.</p>
+                    <p>Transforming careers through innovative training and skill development programs.</p>
                     <div class="social-links">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -588,7 +572,7 @@
                 </div>
                 <div class="footer-section">
                     <h5>Newsletter</h5>
-                    <p>Subscribe to receive updates on new courses and career opportunities.</p>
+                    <p>Stay updated with our latest courses.</p>
                     <form id="newsletterForm" class="newsletter-form">
                         <input type="email" placeholder="Your email" required>
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
