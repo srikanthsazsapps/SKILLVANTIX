@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../css/Career.css">
 </head>
 <body>
-    <!-- Inline JavaScript -->
+    <!-- JavaScript -->
     <script>
         /* ========================================
    CAREER NAVIGATOR PAGE - JAVASCRIPT
@@ -31,6 +31,309 @@
     'use strict';
 
     document.addEventListener('DOMContentLoaded', function() {
+        // ========================================
+        // Career Roadmap Data
+        // ========================================
+        const roadmapData = {
+            'data-analyst': {
+                title: 'Data Analyst',
+                steps: [
+                    {
+                        icon: 'fas fa-cogs',
+                        phase: 'Phase 1: Leverage Your Foundation',
+                        description: 'Your existing analytical mindset is your biggest asset. We start by translating that into the language of data.',
+                        skills: ['Problem Decomposition', 'Statistical Thinking', 'Advanced Excel']
+                    },
+                    {
+                        icon: 'fas fa-database',
+                        phase: 'Phase 2: Core Technical Skills',
+                        description: 'Build the technical toolkit every data analyst needs to manipulate and query data effectively.',
+                        skills: ['SQL (PostgreSQL)', 'Python (Pandas, NumPy)', 'Data Warehousing Concepts']
+                    },
+                    {
+                        icon: 'fas fa-chart-bar',
+                        phase: 'Phase 3: Visualization & Storytelling',
+                        description: 'Learn to turn raw data into compelling stories and actionable insights using powerful visualization tools.',
+                        skills: ['Tableau', 'Power BI', 'Data Storytelling Principles']
+                    },
+                    {
+                        icon: 'fas fa-project-diagram',
+                        phase: 'Phase 4: Portfolio & Specialization',
+                        description: 'Apply your skills to real-world projects. A project analyzing business data or market trends would be a perfect fit.',
+                        skills: ['Portfolio Projects', 'Domain-Specific Analysis', 'Interview Prep']
+                    }
+                ],
+                cta: {
+                    link: '../../index.html#courses',
+                    text: 'Explore our Data Analytics Course'
+                }
+            },
+            'business-analyst': {
+                title: 'Business Analyst',
+                steps: [
+                    {
+                        icon: 'fas fa-lightbulb',
+                        phase: 'Phase 1: Business Fundamentals',
+                        description: 'Build a strong foundation in business processes, requirements gathering, and stakeholder management.',
+                        skills: ['Business Process Modeling', 'Requirements Elicitation', 'Stakeholder Management']
+                    },
+                    {
+                        icon: 'fas fa-chart-line',
+                        phase: 'Phase 2: Data & Analytics',
+                        description: 'Learn to work with data to derive business insights and support decision-making processes.',
+                        skills: ['SQL Basics', 'Excel Advanced', 'Data Visualization (Power BI/Tableau)']
+                    },
+                    {
+                        icon: 'fas fa-project-diagram',
+                        phase: 'Phase 3: Tools & Methodologies',
+                        description: 'Master industry-standard tools and agile methodologies used in modern business analysis.',
+                        skills: ['JIRA & Confluence', 'Agile/Scrum', 'UML Diagrams', 'User Stories']
+                    },
+                    {
+                        icon: 'fas fa-briefcase',
+                        phase: 'Phase 4: Real-World Application',
+                        description: 'Apply your skills through case studies, create comprehensive documentation, and prepare for BA interviews.',
+                        skills: ['Business Case Studies', 'Process Documentation', 'Gap Analysis', 'Interview Prep']
+                    }
+                ],
+                cta: {
+                    link: '../pages/Enroll.html',
+                    text: 'Start Your Business Analyst Journey'
+                }
+            },
+            'data-scientist': {
+                title: 'Data Scientist',
+                steps: [
+                    {
+                        icon: 'fas fa-calculator',
+                        phase: 'Phase 1: Mathematics & Statistics',
+                        description: 'Build the mathematical foundation essential for understanding machine learning algorithms and statistical models.',
+                        skills: ['Linear Algebra', 'Probability & Statistics', 'Calculus Basics']
+                    },
+                    {
+                        icon: 'fas fa-brands fa-python',
+                        phase: 'Phase 2: Programming & Data Manipulation',
+                        description: 'Master Python programming and essential libraries for data manipulation and analysis.',
+                        skills: ['Python Advanced', 'Pandas & NumPy', 'Data Cleaning', 'SQL']
+                    },
+                    {
+                        icon: 'fas fa-brain',
+                        phase: 'Phase 3: Machine Learning & AI',
+                        description: 'Learn supervised and unsupervised learning algorithms, model training, and evaluation techniques.',
+                        skills: ['Scikit-learn', 'Machine Learning Algorithms', 'Model Evaluation', 'Feature Engineering']
+                    },
+                    {
+                        icon: 'fas fa-chart-area',
+                        phase: 'Phase 4: Advanced Topics & Deployment',
+                        description: 'Explore deep learning, deploy models to production, and build an impressive portfolio of data science projects.',
+                        skills: ['TensorFlow/PyTorch', 'Deep Learning', 'Model Deployment', 'Portfolio Projects']
+                    }
+                ],
+                cta: {
+                    link: '../pages/Enroll.html',
+                    text: 'Explore our Data Science Program'
+                }
+            },
+            'data-engineer': {
+                title: 'Data Engineer',
+                steps: [
+                    {
+                        icon: 'fas fa-code',
+                        phase: 'Phase 1: Programming Foundations',
+                        description: 'Master programming fundamentals with Python and SQL, the core languages for data engineering.',
+                        skills: ['Python Programming', 'SQL Advanced', 'Linux/Unix Basics', 'Git & Version Control']
+                    },
+                    {
+                        icon: 'fas fa-database',
+                        phase: 'Phase 2: Database & Storage Systems',
+                        description: 'Learn to design, optimize, and manage both relational and NoSQL databases at scale.',
+                        skills: ['PostgreSQL/MySQL', 'MongoDB/Cassandra', 'Data Modeling', 'Database Optimization']
+                    },
+                    {
+                        icon: 'fas fa-stream',
+                        phase: 'Phase 3: Data Pipelines & ETL',
+                        description: 'Build robust data pipelines and master ETL processes for moving data across systems.',
+                        skills: ['Apache Airflow', 'ETL/ELT Processes', 'Data Warehousing', 'Apache Kafka']
+                    },
+                    {
+                        icon: 'fas fa-cloud',
+                        phase: 'Phase 4: Cloud & Big Data Technologies',
+                        description: 'Deploy data solutions on cloud platforms and work with big data frameworks for large-scale processing.',
+                        skills: ['AWS/Azure/GCP', 'Apache Spark', 'Docker & Kubernetes', 'Portfolio Projects']
+                    }
+                ],
+                cta: {
+                    link: '../pages/Enroll.html',
+                    text: 'Start Your Data Engineering Career'
+                }
+            },
+            'cloud-engineer': {
+                title: 'Cloud Engineer',
+                steps: [
+                    {
+                        icon: 'fas fa-network-wired',
+                        phase: 'Phase 1: Networking & Linux Fundamentals',
+                        description: 'Build a strong foundation in networking concepts, Linux administration, and command-line tools.',
+                        skills: ['TCP/IP & Networking', 'Linux Administration', 'Shell Scripting', 'DNS & Load Balancers']
+                    },
+                    {
+                        icon: 'fas fa-cloud',
+                        phase: 'Phase 2: Cloud Platform Mastery',
+                        description: 'Deep dive into a major cloud platform (AWS, Azure, or GCP) and learn core cloud services.',
+                        skills: ['Compute Services (EC2/VM)', 'Storage Solutions (S3/Blob)', 'Networking (VPC)', 'IAM & Security']
+                    },
+                    {
+                        icon: 'fas fa-cogs',
+                        phase: 'Phase 3: Infrastructure as Code & Automation',
+                        description: 'Learn to automate infrastructure provisioning and configuration using modern DevOps tools.',
+                        skills: ['Terraform', 'Ansible', 'CloudFormation', 'CI/CD Pipelines']
+                    },
+                    {
+                        icon: 'fas fa-shield-alt',
+                        phase: 'Phase 4: Security & Optimization',
+                        description: 'Master cloud security best practices, cost optimization, and prepare for cloud certifications.',
+                        skills: ['Cloud Security', 'Monitoring (CloudWatch)', 'Cost Optimization', 'Certification Prep']
+                    }
+                ],
+                cta: {
+                    link: '../pages/Enroll.html',
+                    text: 'Launch Your Cloud Engineering Career'
+                }
+            },
+            'devops-engineer': {
+                title: 'DevOps Engineer',
+                steps: [
+                    {
+                        icon: 'fas fa-terminal',
+                        phase: 'Phase 1: Development & Operations Basics',
+                        description: 'Learn programming fundamentals, version control, and Linux system administration.',
+                        skills: ['Python/Bash Scripting', 'Git & GitHub', 'Linux Administration', 'Networking Basics']
+                    },
+                    {
+                        icon: 'fas fa-rocket',
+                        phase: 'Phase 2: CI/CD & Automation',
+                        description: 'Master continuous integration and deployment pipelines using industry-standard tools.',
+                        skills: ['Jenkins/GitLab CI', 'GitHub Actions', 'Build Automation', 'Automated Testing']
+                    },
+                    {
+                        icon: 'fas fa-ship',
+                        phase: 'Phase 3: Containerization & Orchestration',
+                        description: 'Learn to containerize applications and orchestrate them at scale using Kubernetes.',
+                        skills: ['Docker', 'Kubernetes', 'Helm Charts', 'Container Registry']
+                    },
+                    {
+                        icon: 'fas fa-chart-line',
+                        phase: 'Phase 4: Infrastructure & Monitoring',
+                        description: 'Implement infrastructure as code, set up monitoring systems, and learn cloud platforms.',
+                        skills: ['Terraform', 'Prometheus & Grafana', 'AWS/Azure', 'Log Management (ELK)']
+                    }
+                ],
+                cta: {
+                    link: '../pages/Enroll.html',
+                    text: 'Begin Your DevOps Journey'
+                }
+            },
+            'digital-marketer': {
+                title: 'Digital Marketer',
+                steps: [
+                    {
+                        icon: 'fas fa-bullhorn',
+                        phase: 'Phase 1: Marketing Fundamentals',
+                        description: 'Understand core marketing principles, consumer behavior, and the digital marketing landscape.',
+                        skills: ['Marketing Principles', 'Consumer Psychology', 'Brand Strategy', 'Market Research']
+                    },
+                    {
+                        icon: 'fas fa-search',
+                        phase: 'Phase 2: SEO & Content Marketing',
+                        description: 'Master search engine optimization and create compelling content that drives organic traffic.',
+                        skills: ['On-Page SEO', 'Keyword Research', 'Content Strategy', 'Google Analytics', 'Copywriting']
+                    },
+                    {
+                        icon: 'fas fa-ad',
+                        phase: 'Phase 3: Paid Advertising & Social Media',
+                        description: 'Learn to create and optimize paid campaigns across Google, Facebook, Instagram, and LinkedIn.',
+                        skills: ['Google Ads', 'Facebook Ads Manager', 'Social Media Strategy', 'Campaign Optimization']
+                    },
+                    {
+                        icon: 'fas fa-chart-pie',
+                        phase: 'Phase 4: Analytics & Automation',
+                        description: 'Use data analytics to measure ROI, automate marketing workflows, and build a professional portfolio.',
+                        skills: ['Google Analytics 4', 'Marketing Automation', 'A/B Testing', 'Email Marketing', 'Portfolio']
+                    }
+                ],
+                cta: {
+                    link: '../pages/Enroll.html',
+                    text: 'Start Your Digital Marketing Career'
+                }
+            },
+            'full-stack': {
+                title: 'Full Stack Developer',
+                steps: [
+                    {
+                        icon: 'fas fa-code',
+                        phase: 'Phase 1: Programming Fundamentals',
+                        description: 'Your logical thinking is a great starting point for coding. We start with the core languages of the web.',
+                        skills: ['HTML5 & CSS3', 'JavaScript (ES6+)', 'Git & GitHub']
+                    },
+                    {
+                        icon: 'fas fa-desktop',
+                        phase: 'Phase 2: Frontend Development',
+                        description: 'Learn to build beautiful, responsive, and interactive user interfaces using modern frameworks.',
+                        skills: ['React.js', 'Responsive Design', 'API Integration']
+                    },
+                    {
+                        icon: 'fas fa-server',
+                        phase: 'Phase 3: Backend Development',
+                        description: 'Build the server-side logic, databases, and APIs that power web applications.',
+                        skills: ['Node.js & Express', 'REST APIs', 'SQL & NoSQL (MongoDB)']
+                    },
+                    {
+                        icon: 'fas fa-rocket',
+                        phase: 'Phase 4: Deployment & Portfolio',
+                        description: 'Deploy your full-stack applications to the cloud and build a robust portfolio to showcase your end-to-end development skills.',
+                        skills: ['Docker', 'Cloud Services (AWS/Heroku)', 'Full-Stack Projects']
+                    }
+                ],
+                cta: {
+                    link: '../pages/Enroll.html',
+                    text: 'Explore our Full Stack Development Course'
+                }
+            },
+            'ui-ux': {
+                title: 'UI/UX Designer',
+                steps: [
+                    {
+                        icon: 'fas fa-brain',
+                        phase: 'Phase 1: Design Thinking & Empathy',
+                        description: 'Learn the fundamentals of user-centered design. Focus on understanding user problems before seeking solutions.',
+                        skills: ['Design Thinking', 'User Personas', 'Empathy Mapping']
+                    },
+                    {
+                        icon: 'fas fa-sitemap',
+                        phase: 'Phase 2: Research & Structure',
+                        description: 'Master the techniques for user research and structuring information logically to create intuitive user flows.',
+                        skills: ['User Interviews', 'Journey Mapping', 'Information Architecture']
+                    },
+                    {
+                        icon: 'fas fa-drafting-compass',
+                        phase: 'Phase 3: Wireframing & Prototyping',
+                        description: 'Bring ideas to life by creating low-fidelity wireframes and high-fidelity, interactive prototypes in Figma.',
+                        skills: ['Figma', 'Wireframing', 'Interactive Prototyping']
+                    },
+                    {
+                        icon: 'fas fa-palette',
+                        phase: 'Phase 4: Visual Design & Portfolio',
+                        description: 'Learn the principles of UI design, including color, typography, and layout, and build a portfolio-ready case study.',
+                        skills: ['UI Principles', 'Design Systems', 'Portfolio Case Study']
+                    }
+                ],
+                cta: {
+                    link: '../pages/Enroll.html',
+                    text: 'Explore our UI/UX Design Course'
+                }
+            }
+        };
+
         // ========================================
         // Navigation Toggle
         // ========================================
@@ -93,108 +396,6 @@
         // ========================================
         // Career Navigator Logic
         // ========================================
-        const roadmapData = {
-            'data-analyst': {
-                title: 'Data Analyst',
-                steps: [
-                    {
-                        icon: 'fas fa-cogs',
-                        phase: 'Phase 1: Leverage Your Foundation',
-                        description: 'Your existing analytical mindset is your biggest asset. We start by translating that into the language of data.',
-                        skills: ['Problem Decomposition', 'Statistical Thinking', 'Advanced Excel']
-                    },
-                    {
-                        icon: 'fas fa-database',
-                        phase: 'Phase 2: Core Technical Skills',
-                        description: 'Build the technical toolkit every data analyst needs to manipulate and query data effectively.',
-                        skills: ['SQL (PostgreSQL)', 'Python (Pandas, NumPy)', 'Data Warehousing Concepts']
-                    },
-                    {
-                        icon: 'fas fa-chart-bar',
-                        phase: 'Phase 3: Visualization & Storytelling',
-                        description: 'Learn to turn raw data into compelling stories and actionable insights using powerful visualization tools.',
-                        skills: ['Tableau', 'Power BI', 'Data Storytelling Principles']
-                    },
-                    {
-                        icon: 'fas fa-project-diagram',
-                        phase: 'Phase 4: Portfolio & Specialization',
-                        description: 'Apply your skills to real-world projects. A project analyzing business data or market trends would be a perfect fit.',
-                        skills: ['Portfolio Projects', 'Domain-Specific Analysis', 'Interview Prep']
-                    }
-                ],
-                cta: {
-                    link: '/pages/DataAnalytics.html',
-                    text: 'Explore our Data Analytics Course'
-                }
-            },
-            'full-stack': {
-                title: 'Full Stack Developer',
-                steps: [
-                    {
-                        icon: 'fas fa-code',
-                        phase: 'Phase 1: Programming Fundamentals',
-                        description: 'Your logical thinking is a great starting point for coding. We start with the core languages of the web.',
-                        skills: ['HTML5 & CSS3', 'JavaScript (ES6+)', 'Git & GitHub']
-                    },
-                    {
-                        icon: 'fas fa-desktop',
-                        phase: 'Phase 2: Frontend Development',
-                        description: 'Learn to build beautiful, responsive, and interactive user interfaces using modern frameworks.',
-                        skills: ['React.js', 'Responsive Design', 'API Integration']
-                    },
-                    {
-                        icon: 'fas fa-server',
-                        phase: 'Phase 3: Backend Development',
-                        description: 'Build the server-side logic, databases, and APIs that power web applications.',
-                        skills: ['Node.js & Express', 'REST APIs', 'SQL & NoSQL (MongoDB)']
-                    },
-                    {
-                        icon: 'fas fa-rocket',
-                        phase: 'Phase 4: Deployment & Portfolio',
-                        description: 'Deploy your full-stack applications to the cloud and build a robust portfolio to showcase your end-to-end development skills.',
-                        skills: ['Docker', 'Cloud Services (AWS/Heroku)', 'Full-Stack Projects']
-                    }
-                ],
-                cta: {
-                    link: '/pages/FullStack.html',
-                    text: 'Explore our Full Stack Development Course'
-                }
-            },
-            'ui-ux': {
-                title: 'UI/UX Designer',
-                steps: [
-                    {
-                        icon: 'fas fa-brain',
-                        phase: 'Phase 1: Design Thinking & Empathy',
-                        description: 'Learn the fundamentals of user-centered design. Focus on understanding user problems before seeking solutions.',
-                        skills: ['Design Thinking', 'User Personas', 'Empathy Mapping']
-                    },
-                    {
-                        icon: 'fas fa-sitemap',
-                        phase: 'Phase 2: Research & Structure',
-                        description: 'Master the techniques for user research and structuring information logically to create intuitive user flows.',
-                        skills: ['User Interviews', 'Journey Mapping', 'Information Architecture']
-                    },
-                    {
-                        icon: 'fas fa-drafting-compass',
-                        phase: 'Phase 3: Wireframing & Prototyping',
-                        description: 'Bring ideas to life by creating low-fidelity wireframes and high-fidelity, interactive prototypes in Figma.',
-                        skills: ['Figma', 'Wireframing', 'Interactive Prototyping']
-                    },
-                    {
-                        icon: 'fas fa-palette',
-                        phase: 'Phase 4: Visual Design & Portfolio',
-                        description: 'Learn the principles of UI design, including color, typography, and layout, and build a portfolio-ready case study.',
-                        skills: ['UI Principles', 'Design Systems', 'Portfolio Case Study']
-                    }
-                ],
-                cta: {
-                    link: '/pages/UIUX.html',
-                    text: 'Explore our UI/UX Design Course'
-                }
-            }
-        };
-
         const findPathBtn = document.getElementById('find-path');
         const resultsSection = document.getElementById('results');
         const fromDomainSpan = document.getElementById('from-domain');
@@ -268,22 +469,21 @@
     </script>
 
     <!-- Navigation -->
-  <nav class="navbar">
+    <nav class="navbar">
         <div class="container">
-            <a class="navbar-brand" href="../index.html">
+            <a class="navbar-brand" href="../../index.html">
                 <img src="../Image/logo1.jpg" alt="SKILL VANTIX Logo">
-                <!-- <span>SKILL VANTIX</span> -->
             </a>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-           <ul class="nav-menu" id="navMenu">
+            <ul class="nav-menu" id="navMenu">
                 <li class="nav-item"><a class="nav-link" href="../../index.html#programs">Programs</a></li>
                 <li class="nav-item"><a class="nav-link" href="../../index.html#courses">Courses</a></li>
                 <li class="nav-item"><a class="nav-link active" href="../pages/Career.html">Career Services</a></li>
-                <li class="nav-item"><a class="nav-link " href="../pages/About.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/About.html">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="../../index.html#contact">Contact</a></li>
                 <li class="nav-item"><a href="../pages/Enroll.html" class="btn btn-brand">Enroll Now</a></li>
             </ul>
@@ -342,8 +542,14 @@
                             <label for="target-career">Your Target IT Career</label>
                             <select id="target-career" class="form-select">
                                 <option value="data-analyst">Data Analyst</option>
+                                <option value="business-analyst">Business Analyst</option>
+                                <option value="data-scientist">Data Scientist</option>
+                                <option value="data-engineer">Data Engineer</option>
                                 <option value="full-stack">Full Stack Developer</option>
+                                <option value="cloud-engineer">Cloud Engineer</option>
+                                <option value="devops-engineer">DevOps Engineer</option>
                                 <option value="ui-ux">UI/UX Designer</option>
+                                <option value="digital-marketer">Digital Marketer</option>
                             </select>
                         </div>
                     </div>
@@ -381,14 +587,21 @@
                 <div class="footer-section">
                     <h5>SKILL VANTIX</h5>
                     <p>Transforming careers through innovative training and skill development programs.</p>
+                     <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h5>Quick Links</h5>
                     <ul>
-                        <li><a href="index.html#programs">Programs</a></li>
-                        <li><a href="index.html#courses">Courses</a></li>
-                        <li><a href="#">Career Transform </a></li>
-                        <li><a href="pages/About.html">About</a></li>
+                        <li><a href="../../index.html#programs">Programs</a></li>
+                        <li><a href="../../index.html#courses">Courses</a></li>
+                        <li><a href="./About.html">About Us</a></li>
+                        <li><a href="../../index.html#contact">Contact</a></li>
+                        <li><a href="./Career.html">Career Services</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -400,6 +613,7 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 SKILL VANTIX. All Rights Reserved.</p>
+               
             </div>
         </div>
     </footer>
