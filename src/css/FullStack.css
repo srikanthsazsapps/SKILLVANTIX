@@ -276,7 +276,7 @@ p {
     overflow: hidden;
     background: 
         linear-gradient(135deg, rgba(10, 37, 64, 0.9) 0%, rgba(13, 58, 92, 0.85) 100%),
-        url('https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1920') center center;
+        url('../Image/Fullstack1.webp') center center;
     background-size: cover;
     background-attachment: fixed;
 }

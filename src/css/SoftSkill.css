@@ -299,9 +299,9 @@ p {
     padding: 180px 0 100px;
     margin-top: 0px;
     overflow: hidden;
-    background: 
+    /* background: 
         linear-gradient(135deg, rgba(10, 37, 64, 0.9) 0%, rgba(13, 58, 92, 0.85) 100%),
-        url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop') center center;
+        url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop') center center; */
     background-size: cover;
     background-attachment: fixed;
 }
@@ -314,7 +314,7 @@ p {
     bottom: 0;
     background: 
         var(--gradient-primary),
-        url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop') center center;
+        url('../Image/Aptitude1.avif') center center;
     background-size: cover;
     background-attachment: fixed;
     z-index: -1;
